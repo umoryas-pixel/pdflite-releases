@@ -130,6 +130,9 @@ body.fs header{position:fixed;left:0;right:0;top:0;z-index:30;transform:translat
 #dtabs .plus{padding:4px 10px;border:0;background:none;color:var(--mut);font-size:17px}
 body.fs #dtabs{display:none}body:not(.has) #side{display:none!important}
 #tocrBox{display:grid;gap:8px;margin-top:8px}#tocrBox label{display:flex;gap:8px;align-items:flex-start}#fc a{color:var(--acc);cursor:pointer;text-decoration:underline}
+html[dir=rtl] #pager,html[dir=rtl] #viewer,html[dir=rtl] #mk,html[dir=rtl] #pg,html[dir=rtl] #zv,html[dir=rtl] kbd,html[dir=rtl] .ic{direction:ltr}
+html[dir=rtl] #side{border-left:1px solid var(--line);border-right:0}html[dir=rtl] dialog{text-align:right}html[dir=rtl] #tools h3,html[dir=rtl] dialog h3{text-align:right}
+html[dir=rtl] .pg .an text,html[dir=rtl] textarea{unicode-bidi:plaintext}
 @media(max-width:760px){
 header{overflow-x:auto;scrollbar-width:none;gap:4px;padding:0 6px;height:50px}header::-webkit-scrollbar{display:none}
 header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-height:38px;padding-left:10px;padding-right:10px}
@@ -403,7 +406,7 @@ $('#lAct').onclick=()=>{const e=$('#lErr');e.style.color='#dc2626';const k=$('#l
   localStorage.pl_k=k.replace(/\s+/g,'');e.textContent='';$('#lKey').value='';licUI();$('#dLic').close();toast('License activated. Thank you!',3500)};
 $('#lOff').onclick=()=>{localStorage.removeItem('pl_k');licUI()};
 licUI();setInterval(licUI,6e5);addEventListener('focus',licUI);
-const NEWS={'0.4.0':['Tabs: open several PDFs in one window and switch between them. Ctrl+Tab changes tab, Ctrl+W closes one.','OCR: read text from scanned pages (English and Arabic) so you can search and copy it. Tools, then OCR.'],'0.3.0':['Save as: choose a name and place for a copy of your PDF, with markup included (Ctrl+S).','Night mode for pages and Full screen, both in the Fit menu. F11 toggles full screen.','Move around a page by holding Space and dragging, or with the middle mouse button. Home and End jump to the first and last page.','New tools: save PDF pages as pictures (ZIP), and add page numbers and a watermark.'],'0.2.5':['Opening another PDF now opens it in its own window, so you can keep several open side by side.','Zooming in keeps text and lines sharp at any zoom level.'],'0.2.4':['Merge now repairs PDFs with an unusual structure instead of failing.'],'0.2.3':['PDF Lite now also runs on phones and tablets (Android and iPhone) as an installable web app.','Draw and mark up with your finger on touchscreens.'],'0.2.2':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.1':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.0':['Print your PDFs, with or without your markup (Print button or Ctrl+P).','Markups panel in the sidebar: every highlight, note, shape, measurement and stamp in one list, with filters.','Export the markup list to a spreadsheet that opens in Excel.','New Count tool for counting items on drawings (Measure, then Count, or press N).','Turn photos into a PDF in Tools, then Images. Phone photos come out the right way up.'],'0.1.1':['Underline and strikethrough tools. Click Highlight again to switch (keys H, U, S).','Rotate and Delete pages added to Tools.','PDFs reopen on the page and zoom where you left off.','Keyboard shortcuts for every tool. Press ? to see them.','Safer zooming on very large pages.']};
+const NEWS={'0.5.0':['Arabic interface: switch between English and العربية from the page-size menu (the Fit button). It opens in Arabic automatically on Arabic computers.'],'0.4.0':['Tabs: open several PDFs in one window and switch between them. Ctrl+Tab changes tab, Ctrl+W closes one.','OCR: read text from scanned pages (English and Arabic) so you can search and copy it. Tools, then OCR.'],'0.3.0':['Save as: choose a name and place for a copy of your PDF, with markup included (Ctrl+S).','Night mode for pages and Full screen, both in the Fit menu. F11 toggles full screen.','Move around a page by holding Space and dragging, or with the middle mouse button. Home and End jump to the first and last page.','New tools: save PDF pages as pictures (ZIP), and add page numbers and a watermark.'],'0.2.5':['Opening another PDF now opens it in its own window, so you can keep several open side by side.','Zooming in keeps text and lines sharp at any zoom level.'],'0.2.4':['Merge now repairs PDFs with an unusual structure instead of failing.'],'0.2.3':['PDF Lite now also runs on phones and tablets (Android and iPhone) as an installable web app.','Draw and mark up with your finger on touchscreens.'],'0.2.2':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.1':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.0':['Print your PDFs, with or without your markup (Print button or Ctrl+P).','Markups panel in the sidebar: every highlight, note, shape, measurement and stamp in one list, with filters.','Export the markup list to a spreadsheet that opens in Excel.','New Count tool for counting items on drawings (Measure, then Count, or press N).','Turn photos into a PDF in Tools, then Images. Phone photos come out the right way up.'],'0.1.1':['Underline and strikethrough tools. Click Highlight again to switch (keys H, U, S).','Rotate and Delete pages added to Tools.','PDFs reopen on the page and zoom where you left off.','Keyboard shortcuts for every tool. Press ? to see them.','Safer zooming on very large pages.']};
 (async()=>{try{const v=await T.app.getVersion(),last=localStorage.lastver;localStorage.lastver=v;
   if(v!==last&&!FIRST_RUN&&NEWS[v]&&!licLocked){$('#nVer').textContent=v;$('#nList').innerHTML=NEWS[v].map(x=>'<li>'+esc(x)+'</li>').join('');$('#dNew').showModal()}}catch(e){}})();
 $('#nOk').onclick=()=>$('#dNew').close();
@@ -798,7 +801,7 @@ window.addEventListener('drop',e=>{e.preventDefault();if($('#tools').open&&tt===
 $('#bOpen').onclick=pick;$('#eOpen').onclick=pick;$('#bSide').onclick=toggleSide;$('#bFind').onclick=showFind;
 $('#bZm').onclick=()=>zoom(1/1.2);$('#bZp').onclick=()=>zoom(1.2);$('#bFit').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop();return}if(!V.doc)return;
   const cur=V.fit?(V.fitMode==='p'?'p':'w'):V.fitMode||'',it=(k,t,h)=>'<button data-fit="'+k+'"><b>'+(cur===k?'✓ ':'')+t+'</b><small>'+h+'</small></button>';
-  showPop(b,it('w','Fit width','Page fills the window width')+it('p','Fit page','Whole page visible at once')+it('a4','A4 size','21 cm wide, like printed paper')+it('1','Actual size','100% · original PDF size')+'<div class="sep"></div><button data-act="dark"><b>'+(document.body.classList.contains('dark')?'✓ ':'')+'Night mode</b><small>Dark pages for easier reading</small></button><button data-act="full"><b>'+(FS?'✓ ':'')+'Full screen</b><small>F11 · Esc to leave</small></button>')};
+  showPop(b,it('w','Fit width','Page fills the window width')+it('p','Fit page','Whole page visible at once')+it('a4','A4 size','21 cm wide, like printed paper')+it('1','Actual size','100% · original PDF size')+'<div class="sep"></div><button data-act="dark"><b>'+(document.body.classList.contains('dark')?'✓ ':'')+'Night mode</b><small>Dark pages for easier reading</small></button><button data-act="full"><b>'+(FS?'✓ ':'')+'Full screen</b><small>F11 · Esc to leave</small></button><button data-act="lang"><b>'+(LANG==='ar'?'English':'العربية')+'</b><small>Language · اللغة</small></button>')};
 $('#pg').onkeydown=e=>{if(e.key==='Enter'){goTo(+e.target.value);e.target.blur()}};
 $('#viewer').onscroll=()=>{cancelAnimationFrame(V.raf);V.raf=requestAnimationFrame(upd);schedHi()};
 window.addEventListener('wheel',e=>{if(!e.ctrlKey)return;e.preventDefault();if(!V.doc||licLocked||document.querySelector('dialog[open]'))return;
@@ -1039,7 +1042,7 @@ $('#bStamp').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop()
   showPop(b,stampHtml())};
 $('#pop').onclick=e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.fit){hidePop();setFit(b.dataset.fit==='1'?'1':b.dataset.fit)}
-  else if(b.dataset.act){hidePop();b.dataset.act==='dark'?toggleDark():setFull(!FS)}
+  else if(b.dataset.act){hidePop();b.dataset.act==='dark'?toggleDark():b.dataset.act==='lang'?applyLang(LANG==='ar'?'en':'ar'):setFull(!FS)}
   else if(b.dataset.c){setColor(b.dataset.c);hidePop()}
   else if(b.dataset.tm){setTool(b.dataset.tm)}
   else if(b.dataset.sh){setTool(b.dataset.sh);$('#bShape .ic').innerHTML=SH[b.dataset.sh][1]}
@@ -1648,4 +1651,111 @@ if(T){
   T.event.listen('tauri://drag-drop',e=>dropPaths((e.payload&&e.payload.paths)||[]));
 }
 showRecent();renderTools();
+
+/* ---------- language: English / العربية ---------- */
+const AR={
+// header, menus
+'Open':'فتح','Tools':'الأدوات','Print':'طباعة','Find':'بحث','Save as':'حفظ باسم','Save as…':'حفظ باسم…','Sidebar':'اللوحة الجانبية','Pages':'الصفحات','Bookmarks':'الإشارات المرجعية','Markups':'التعليقات والعلامات','Shortcuts':'الاختصارات',
+'Fit width':'ملاءمة العرض','Fit page':'ملاءمة الصفحة','A4 size':'حجم A4','Actual size':'الحجم الفعلي','Custom':'مخصص','Fit width ▾':'ملاءمة العرض ▾','Fit page ▾':'ملاءمة الصفحة ▾','A4 size ▾':'حجم A4 ▾','Actual size ▾':'الحجم الفعلي ▾','Custom ▾':'مخصص ▾',
+'Page fills the window width':'تملأ الصفحة عرض النافذة','Whole page visible at once':'تظهر الصفحة كاملة','21 cm wide, like printed paper':'بعرض 21 سم مثل الورق المطبوع','100% · original PDF size':'100% · الحجم الأصلي للملف',
+'Night mode':'الوضع الليلي','Dark pages for easier reading':'صفحات داكنة لقراءة أريح','Full screen':'ملء الشاشة','F11 · Esc to leave':'F11 · اضغط Esc للخروج',
+'Language · اللغة':'Language · اللغة',
+'Trial':'تجربة','Pro':'احترافي','Free trial':'تجربة مجانية','Trial ended':'انتهت التجربة','License expired':'انتهى الترخيص','License':'الترخيص',
+'A fast, simple PDF viewer with merge, split and compress.':'عارض PDF سريع وبسيط مع الدمج والتقسيم والضغط.','Open a PDF':'فتح ملف PDF','or drop a file anywhere ·':'أو اسحب ملفاً وأفلته في أي مكان ·','keyboard shortcuts':'اختصارات لوحة المفاتيح','Recent':'الأخيرة',
+// toolbar
+'Select':'تحديد','Highlight':'تظليل','Pen':'قلم','Text':'نص','Callout':'تعليق','Shapes':'أشكال','Measure':'قياس','Stamp':'ختم','Sign':'توقيع','Underline':'تسطير','Strikethrough':'شطب','Line':'خط','Arrow':'سهم','Rectangle':'مستطيل','Ellipse':'قطع ناقص','Count':'عدّ','Hand':'يد','Text note':'ملاحظة نصية',
+'Length':'الطول','Area':'المساحة','Set scale':'ضبط المقياس','Straight lines, squares':'خطوط مستقيمة ومربعات','Black ink':'حبر أسود','Blue ink':'حبر أزرق','Brush':'فرشاة','Delete selected':'حذف المحدد','Delete':'حذف',
+'Hide toolbar':'إخفاء الأدوات','Show markup tools':'إظهار أدوات التعليق','Drag to move the toolbar (double-click to reset)':'اسحب لتحريك الشريط (انقر مرتين للإعادة)','Switch between horizontal and vertical':'التبديل بين الأفقي والعمودي',
+'Highlight text or an area':'تظليل نص أو منطقة','Highlight text or an area. Click again to switch to underline or strikethrough (keys H, U, S)':'تظليل نص أو منطقة. انقر مرة أخرى للتبديل إلى التسطير أو الشطب (المفاتيح H و U و S)','Freehand pen':'قلم حر','Select, move, copy text':'تحديد ونقل ونسخ النص',
+'Comment box with arrow: click the target, drag to the box. Select it later to drag the arrow tip or the box; double-click to edit the text':'مربع تعليق بسهم: انقر على الهدف ثم اسحب إلى المربع. حدّده لاحقاً لتحريك السهم أو المربع، وانقر مرتين لتعديل النص','Shapes: line, arrow, rectangle, ellipse':'أشكال: خط، سهم، مستطيل، قطع ناقص','Measure length and area':'قياس الطول والمساحة','Size of new marks: S, M, L':'حجم العلامات الجديدة: S و M و L',
+'Delete selected mark (Del)':'حذف العلامة المحددة (Del)','Undo (Ctrl+Z)':'تراجع (Ctrl+Z)','Redo (Ctrl+Y)':'إعادة (Ctrl+Y)','Stamps':'الأختام','Signature':'التوقيع','Text note':'ملاحظة نصية',
+// header tooltips
+'Open (Ctrl+O)':'فتح (Ctrl+O)','Print (Ctrl+P)':'طباعة (Ctrl+P)','Find (Ctrl+F)':'بحث (Ctrl+F)','Find in document':'بحث في المستند','Zoom in':'تكبير','Zoom out':'تصغير','Compress, merge, split':'ضغط ودمج وتقسيم','Trial / license':'التجربة / الترخيص','Pages, bookmarks and markups (Ctrl+B)':'الصفحات والإشارات والتعليقات (Ctrl+B)',
+'Page size: fit width, fit page, A4, actual size (Ctrl+0 = fit width)':'حجم الصفحة: ملاءمة العرض أو الصفحة أو A4 أو الحجم الفعلي (Ctrl+0 = ملاءمة العرض)','Rotate this page left':'تدوير هذه الصفحة لليسار','Rotate this page right':'تدوير هذه الصفحة لليمين','Save as… a new PDF file, with your markup included (Ctrl+S)':'حفظ باسم… ملف PDF جديد مع تعليقاتك (Ctrl+S)','Next search match':'نتيجة البحث التالية','Change order':'تغيير الترتيب',
+// tools dialog
+'Compress':'ضغط','Merge':'دمج','Split':'تقسيم','Rotate':'تدوير','Delete pages':'حذف الصفحات','Images':'صور','To images':'إلى صور','Watermark':'علامة مائية','OCR':'OCR',
+'Drop PDF files here or click to choose':'أفلت ملفات PDF هنا أو انقر للاختيار','Drop photos or images here (JPG, PNG) or click to choose':'أفلت الصور هنا (JPG, PNG) أو انقر للاختيار','Balanced (good quality, smaller)':'متوازن (جودة جيدة وحجم أصغر)','Strong (smallest size)':'قوي (أصغر حجم)',
+'All pages (':'كل الصفحات (','Current page':'الصفحة الحالية','Include my markup':'تضمين تعليقاتي','Page size = image size':'حجم الصفحة = حجم الصورة','A4 pages (fit and centre)':'صفحات A4 (ملاءمة وتوسيط)',
+'Compress, merge, split':'ضغط ودمج وتقسيم','Turn photos and images into a PDF':'تحويل الصور إلى ملف PDF','Save PDF pages as JPG or PNG pictures (ZIP)':'حفظ صفحات PDF كصور JPG أو PNG (ملف ZIP)','Add page numbers and a watermark':'إضافة أرقام الصفحات وعلامة مائية','Read text in scanned pages so you can search and copy it':'قراءة النص في الصفحات الممسوحة ضوئياً للبحث فيه ونسخه',
+'JPG · standard (150 dpi)':'JPG · عادي (150 نقطة/بوصة)','JPG · high quality (220 dpi)':'JPG · جودة عالية (220 نقطة/بوصة)','PNG · lossless (150 dpi)':'PNG · بدون فقد (150 نقطة/بوصة)',
+'Page numbers':'أرقام الصفحات','Bottom centre':'أسفل الوسط','Bottom right':'أسفل اليمين','Bottom left':'أسفل اليسار','Top right':'أعلى اليمين','Page 1 of 10':'صفحة 1 من 10','Watermark: light grey':'العلامة: رمادي فاتح','Watermark: red':'العلامة: أحمر','Watermark text (optional), e.g. DRAFT':'نص العلامة المائية (اختياري)، مثل DRAFT',
+'English + Arabic (recommended)':'إنجليزي + عربي (موصى به)','English only':'الإنجليزية فقط','Arabic only':'العربية فقط','Also save a searchable PDF copy':'احفظ أيضاً نسخة PDF قابلة للبحث','English letters and numbers only. Arabic stays searchable inside PDF Lite.':'الحروف الإنجليزية والأرقام فقط. يبقى النص العربي قابلاً للبحث داخل PDF Lite.',
+'Read text (OCR)':'قراءة النص (OCR)','Add to PDF':'إضافة إلى الملف','Save as pictures (ZIP)':'حفظ كصور (ZIP)','Create PDF':'إنشاء PDF','Delete pages':'حذف الصفحات','Extract pages':'استخراج الصفحات','Rotate pages':'تدوير الصفحات',
+'Pages to delete, e.g. 2, 4-6':'الصفحات المراد حذفها، مثل 2, 4-6','Pages to extract, e.g. 1-3, 5, 8-10':'الصفحات المراد استخراجها، مثل 1-3, 5, 8-10','Pages to mark (empty = all pages), e.g. 1-3, 5':'الصفحات المراد وسمها (فارغ = كل الصفحات)، مثل 1-3, 5','Pages to read (empty = every page without text), e.g. 1-3, 5':'الصفحات المراد قراءتها (فارغ = كل صفحة بلا نص)، مثل 1-3, 5','Pages to rotate (empty = all pages), e.g. 1-3, 5':'الصفحات المراد تدويرها (فارغ = الكل)، مثل 1-3, 5','Pages to save (empty = all pages), e.g. 1-3, 5':'الصفحات المراد حفظها (فارغ = الكل)، مثل 1-3, 5',
+'Rotate left 90°':'تدوير 90° لليسار','Rotate right 90°':'تدوير 90° لليمين','Rotate 180°':'تدوير 180°',
+'Open a PDF first':'افتح ملف PDF أولاً','Open a PDF first, then come back here.':'افتح ملف PDF أولاً ثم عُد إلى هنا.','Working…':'جارٍ العمل…','Done.':'تم.','Open file':'فتح الملف','Cancel':'إلغاء','Got it':'حسناً','Clear':'مسح','Activate':'تفعيل','Unlock':'فتح القفل','Upload image':'رفع صورة','Use signature':'استخدام التوقيع','Draw':'رسم','Type':'كتابة','Script':'خط يدوي',
+'Add at least 2 files':'أضف ملفين على الأقل','Enter page numbers':'أدخل أرقام الصفحات','You cannot delete every page':'لا يمكن حذف كل الصفحات','Building the searchable PDF…':'جارٍ إنشاء ملف PDF قابل للبحث…','Tick page numbers, type a watermark, or both':'فعّل أرقام الصفحات أو اكتب علامة مائية أو كليهما','The watermark can only use English letters, numbers and common symbols':'العلامة المائية تدعم الأحرف الإنجليزية والأرقام والرموز الشائعة فقط','Password-protected PDFs cannot be rotated here':'لا يمكن تدوير ملفات PDF المحمية بكلمة مرور هنا','The OCR files are missing from this build':'ملفات التعرف على النص (OCR) غير موجودة في هذا الإصدار','Stopped.':'تم الإيقاف.',
+// dialogs
+'Keyboard shortcuts':'اختصارات لوحة المفاتيح','This list':'هذه القائمة','Zoom in / out':'تكبير / تصغير','Undo / redo':'تراجع / إعادة','Move the page':'تحريك الصفحة','Go to page':'الانتقال إلى صفحة','First / last page':'الصفحة الأولى / الأخيرة','Page up / down':'الصفحة السابقة / التالية','Next tab':'التبويب التالي','Close tab':'إغلاق التبويب','Space':'مسافة','+drag':'+سحب','Home':'Home','End':'End',
+'Password required':'كلمة المرور مطلوبة','This PDF is encrypted. Enter the password to open it.':'هذا الملف مشفّر. أدخل كلمة المرور لفتحه.','Password':'كلمة المرور','Incorrect password':'كلمة المرور غير صحيحة',
+'Signature':'التوقيع','Type your name':'اكتب اسمك','Draw or type your signature first':'ارسم توقيعك أو اكتبه أولاً','Saved signatures':'التواقيع المحفوظة','My stamps':'أختامي','Name or company on stamps':'الاسم أو الشركة على الأختام',
+'Enter the real length of the line you just drew (a dimension you know on the drawing).':'أدخل الطول الحقيقي للخط الذي رسمته للتو (بُعد معروف في المخطط).','Use this scale for all pages':'استخدام هذا المقياس لكل الصفحات','Set the scale first: draw along a known length':'اضبط المقياس أولاً: ارسم خطاً على طول معروف','Scale not set':'لم يُضبط المقياس','Scale not set yet. Use "Set scale" first.':'لم يُضبط المقياس بعد. استخدم «ضبط المقياس» أولاً.','Scale set. Click two points to measure a length.':'تم ضبط المقياس. انقر نقطتين لقياس طول.','Enter the real length as a number':'أدخل الطول الحقيقي كرقم','Scale is set for this page.':'تم ضبط المقياس لهذه الصفحة.','Count totals:':'إجمالي العدّ:','cm':'سم','mm':'مم','in':'بوصة','ft':'قدم',
+'Buy a license':'شراء ترخيص','Remove license':'إزالة الترخيص','Check for updates':'التحقق من التحديثات','Paste your license key (PDFL-…)':'ألصق مفتاح الترخيص (PDFL-…)','License activated. Thank you!':'تم تفعيل الترخيص. شكراً لك!','This license key is not valid.':'مفتاح الترخيص هذا غير صالح.','This license key has expired.':'انتهت صلاحية مفتاح الترخيص هذا.','Licensing is not configured in this build.':'الترخيص غير مُعدّ في هذا الإصدار.',
+'Update now':'حدّث الآن','Downloading update…':'جارٍ تنزيل التحديث…','Installing. PDF Lite will restart.':'جارٍ التثبيت. سيُعاد تشغيل PDF Lite.','The update could not be installed. Try again later.':'تعذّر تثبيت التحديث. حاول لاحقاً.','You have the latest version.':'لديك أحدث إصدار.','Could not check for updates.':'تعذّر التحقق من التحديثات.','You have unsaved markup. Install the update anyway? PDF Lite will close.':'لديك تعليقات غير محفوظة. هل تريد تثبيت التحديث؟ سيُغلق PDF Lite.',
+'What\'s new in':'الجديد في',
+// toasts and messages
+'Opening…':'جارٍ الفتح…','Saving…':'جارٍ الحفظ…','Saved':'تم الحفظ','Saved with your markup':'تم الحفظ مع تعليقاتك','Open copy':'فتح النسخة','Save cancelled':'أُلغي الحفظ','Could not save the file':'تعذّر حفظ الملف','Copied':'تم النسخ','No text to copy':'لا يوجد نص للنسخ','Nothing to export':'لا يوجد ما يمكن تصديره','Click on the page to place it':'انقر على الصفحة لوضعه','That image looks empty':'تبدو هذه الصورة فارغة','Could not read that image':'تعذّر قراءة هذه الصورة','Could not draw markup':'تعذّر رسم التعليق','Could not keep markup between sessions (storage full)':'تعذّر حفظ التعليقات بين الجلسات (التخزين ممتلئ)','Storage is full — remove a saved stamp':'التخزين ممتلئ — احذف ختماً محفوظاً','Could not prepare the pages for printing.':'تعذّر تجهيز الصفحات للطباعة.','Export the markup list to a spreadsheet that opens in Excel.':'تصدير قائمة التعليقات إلى جدول بيانات يُفتح في Excel.','CSV spreadsheet':'جدول CSV','ZIP archive':'أرشيف ZIP',
+'Copy':'نسخ','Export':'تصدير','All markup':'كل التعليقات','Notes and callouts':'الملاحظات والتعليقات','Shapes and pen':'الأشكال والقلم','Stamps and signatures':'الأختام والتواقيع','Measure and count':'القياس والعدّ','Notes':'الملاحظات','Sort':'ترتيب','Filter':'تصفية',
+'APPROVED AS NOTED':'معتمد مع الملاحظات','APPROVED':'معتمد','REJECTED':'مرفوض','FOR CONSTRUCTION':'للتنفيذ','FOR INFORMATION':'للعلم','DRAFT':'مسودة','VOID':'ملغى','REVISE':'يُعدَّل',
+'Scale not set yet':'لم يُضبط المقياس بعد','Colour':'اللون','Close (Ctrl+W)':'إغلاق (Ctrl+W)','Open another PDF (Ctrl+O)':'فتح ملف PDF آخر (Ctrl+O)','Open another PDF':'فتح ملف PDF آخر'
+};
+const ARP=[
+ [/^✓ (.+)$/,(m,a)=>'✓ '+(trStr(a)||a)],
+ [/^Page (\d+) of (\d+)$/,'صفحة $1 من $2'],
+ [/^Page (\d+) rotated · Save copy to keep it in a PDF$/,'تم تدوير الصفحة $1 · استخدم «حفظ باسم» لحفظه في ملف PDF'],
+ [/^Back to page (\d+)$/,'العودة إلى الصفحة $1'],
+ [/^Reading page (\d+) of (\d+)…$/,'قراءة الصفحة $1 من $2…'],
+ [/^Preparing page (\d+) of (\d+)…$/,'تجهيز الصفحة $1 من $2…'],
+ [/^Adding image (\d+) of (\d+)…$/,'إضافة الصورة $1 من $2…'],
+ [/^Working… page (\d+) of (\d+)$/,'جارٍ العمل… الصفحة $1 من $2'],
+ [/^Working… repairing (.+)$/,'جارٍ العمل… إصلاح $1'],
+ [/^(\d+) files merged\.$/,'تم دمج $1 ملفات.'],
+ [/^(\d+) pages extracted\.$/,'تم استخراج $1 صفحات.'],
+ [/^(\d+) images? turned into a PDF\.$/,'تم تحويل $1 صور إلى ملف PDF.'],
+ [/^(\d+) pictures? saved in a ZIP file\.$/,'تم حفظ $1 صور في ملف ZIP.'],
+ [/^(\d+) pages? updated\.$/,'تم تحديث $1 صفحات.'],
+ [/^(\d+) pages? rotated\.$/,'تم تدوير $1 صفحات.'],
+ [/^(\d+) pages? deleted\.$/,'تم حذف $1 صفحات.'],
+ [/^Read (\d+) pages?, (\d+) words found\.$/,'تمت قراءة $1 صفحات، وعُثر على $2 كلمة.'],
+ [/^(\d+) pages already had text\.$/,'$1 صفحات تحتوي نصاً أصلاً.'],
+ [/^Press Ctrl\+F to search, or select text with the mouse\.$/,'اضغط Ctrl+F للبحث أو حدّد النص بالفأرة.'],
+ [/^The copy has (\d+) searchable words \(English letters and numbers\)\.$/,'تحتوي النسخة على $1 كلمة قابلة للبحث (أحرف إنجليزية وأرقام).'],
+ [/^(.+) had an unusual structure, so (its pages were|those pages were) rebuilt as images \(text in them is no longer selectable\)\.$/,'$1 ذو بنية غير معتادة، لذا أُعيد بناء صفحاته كصور (لم يعد النص فيها قابلاً للتحديد).'],
+ [/^Nothing to read\. Every page already has searchable text\.$/,'لا شيء للقراءة. كل الصفحات تحتوي نصاً قابلاً للبحث.'],
+ [/^Reads the scanned pages of "(.+)" so you can search them \(Ctrl\+F\) and copy text\. It runs on your computer; nothing is uploaded\.$/,'يقرأ الصفحات الممسوحة ضوئياً في «$1» لتبحث فيها (Ctrl+F) وتنسخ النص. يعمل على جهازك ولا يُرفع أي شيء.'],
+ [/^Invalid range: (.+)$/,'نطاق غير صالح: $1'],
+ [/^Out of range: (.+)$/,'خارج النطاق: $1'],
+ [/^Could not open this PDF: (.+)$/,'تعذّر فتح ملف PDF هذا: $1'],
+ [/^Could not read (.+)$/,'تعذّرت قراءة $1'],
+ [/^Could not rotate: (.+)$/,'تعذّر التدوير: $1'],
+ [/^Could not save: (.+)$/,'تعذّر الحفظ: $1'],
+ [/^Exported (\d+) items?$/,'تم تصدير $1 عناصر'],
+ [/^Copied (\d+) items$/,'تم نسخ $1 عناصر'],
+ [/^Version ([\d.]+) is available\.?$/,'الإصدار $1 متاح'],
+ [/^Version ([\d.]+)$/,'الإصدار $1'],
+ [/^Trial · (\d+) days? left$/,(m,d)=>'تجربة · متبقٍ '+d+(d==1?' يوم':' أيام')],
+ [/^(\d+) days? left in your free trial\. Already bought a license\? Paste the key below\.$/,'متبقٍ $1 أيام في تجربتك المجانية. اشتريت ترخيصاً؟ ألصق المفتاح أدناه.'],
+ [/^Licensed to (.+) · (valid until .+|lifetime license)\.$/,(m,e,v)=>'مرخّص لـ '+e+' · '+(/^valid until/.test(v)?'صالح حتى'+v.slice(11):'ترخيص دائم')+'.'],
+ [/^Your license expired on (.+)\. Renew it, then paste the new key below\.$/,'انتهى ترخيصك في $1. جدّده ثم ألصق المفتاح الجديد أدناه.'],
+ [/^p\. (\d+)$/,'ص $1'],
+ [/^(\d+) \/ (\d+)$/,'$1 / $2'],
+ [/^(\d+) markups?$/,'$1 تعليقات'],
+];
+let LANG='en';const trMap=new Map(),trEl=new Set();let trObs=null;
+function trStr(str){const t=String(str).trim();if(!t)return null;let r=AR[t];
+  if(r==null){for(const[re,fn]of ARP){const m=t.match(re);if(m){r=typeof fn==='function'?fn(...m):t.replace(re,fn);break}}}
+  return r==null?null:String(str).replace(t,()=>r)}
+const trSkip=n=>{const e=n.nodeType===3?n.parentElement:n;return!e||!!e.closest('#viewer,script,style,textarea,.tx,[data-keep]')};
+function trText(n){if(LANG!=='ar'||trSkip(n))return;const o=trMap.get(n);if(o&&n.data===o.ar)return;const r=trStr(n.data);if(r!=null&&r!==n.data){trMap.set(n,{en:n.data,ar:r});n.data=r}}
+function trAttrs(e){if(LANG!=='ar'||e.nodeType!==1||trSkip(e))return;for(const a of['title','placeholder','aria-label']){const v=e.getAttribute&&e.getAttribute(a);if(!v)continue;const o=e.__en&&e.__en[a];if(o&&v===o.ar)continue;const r=trStr(v);if(r!=null&&r!==v){(e.__en=e.__en||{})[a]={en:v,ar:r};e.setAttribute(a,r);trEl.add(e)}}}
+function trTree(root){if(LANG!=='ar')return;if(root.nodeType===3){trText(root);return}if(root.nodeType!==1||trSkip(root))return;trAttrs(root);
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT|NodeFilter.SHOW_ELEMENT);let n;while(n=w.nextNode()){if(n.nodeType===3)trText(n);else if(n.nodeType===1){if(n.id==='viewer'){w.nextSibling();continue}trAttrs(n)}}}
+function applyLang(l){
+  LANG=l==='ar'?'ar':'en';try{localStorage.pl_lang=LANG}catch(e){}
+  document.documentElement.lang=LANG;document.documentElement.dir=LANG==='ar'?'rtl':'ltr';
+  if(LANG==='ar'){trTree(document.body);if(!trObs){trObs=new MutationObserver(ms=>{for(const m of ms){if(m.type==='childList')m.addedNodes.forEach(trTree);else if(m.type==='characterData')trText(m.target);else if(m.type==='attributes')trAttrs(m.target)}});trObs.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['title','placeholder']})}}
+  else{if(trObs){trObs.disconnect();trObs=null}trMap.forEach((o,n)=>{if(n.isConnected&&n.data===o.ar)n.data=o.en});trMap.clear();trEl.forEach(e=>{for(const a in e.__en||{})if(e.getAttribute(a)===e.__en[a].ar)e.setAttribute(a,e.__en[a].en);e.__en=null});trEl.clear()}
+  setTimeout(()=>{try{relayout()}catch(e){}},50)}
+try{applyLang(localStorage.pl_lang||((navigator.language||'').toLowerCase().startsWith('ar')?'ar':'en'))}catch(e){}
+
 </script></body></html>
