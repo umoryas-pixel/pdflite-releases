@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your PDF Lite license</title><meta name="robots" content="noindex"><link rel="icon" href="icons/icon-192.png"><link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="./"><i>PDF</i>PDF Lite</a><nav><button class="lang" type="button">العربية</button></nav></div></header>
+<div class="page">
+ <h1 data-t="th_h">Thank you!</h1>
+ <p id="st" data-t="th_wait">Confirming your payment…</p>
+ <div id="ok" hidden>
+  <p data-t="th_ok"></p>
+  <div class="key" id="key"></div>
+  <p><button class="btn" id="cp" type="button" data-t="th_copy">Copy key</button></p>
+  <h2 data-t="th_how"></h2>
+  <ol><li data-t="th_1"></li><li data-t="th_2"></li><li data-t="th_3"></li></ol>
+  <p data-t="th_mail"></p>
+ </div>
+ <p><a href="./" data-t="th_home">Back to the website</a></p>
+</div>
+<script src="config.js"></script><script src="site.js"></script>
+<script>
+(async()=>{
+ const P=window.PL,q=new URLSearchParams(location.search),st=document.getElementById('st');
+ let id=q.get('invoice_id')||q.get('invoice')||q.get('id');
+ if(!id){try{id=(JSON.parse(localStorage.getItem('pl_order')||'{}')||{}).id}catch(e){}}
+ if(!id){st.textContent=plT('th_none');return}
+ for(let i=0;i<8;i++){
+  try{const r=await fetch(P.API+'/api/claim?invoice='+encodeURIComponent(id)),j=await r.json();
+   if(r.ok&&j.key){st.hidden=true;document.getElementById('ok').hidden=false;document.getElementById('key').textContent=j.key;
+    document.getElementById('cp').onclick=async e=>{try{await navigator.clipboard.writeText(j.key)}catch(x){const s=getSelection(),g=document.createRange();g.selectNodeContents(document.getElementById('key'));s.removeAllRanges();s.addRange(g);document.execCommand('copy')}e.target.textContent=plT('th_copied')};
+    try{localStorage.removeItem('pl_order')}catch(e){}return}
+   if(r.status===404||r.status===400)break;
+  }catch(e){}
+  await new Promise(r=>setTimeout(r,2500));
+ }
+ st.textContent=plT('th_bad');
+})();
+</script></body></html>
