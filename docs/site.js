@@ -28,7 +28,7 @@ const T={en:{
  f_terms:'Terms',f_priv:'Privacy',f_ref:'Refunds',f_help:'Support on WhatsApp',f_app:'Use in browser',
  th_h:'Thank you!',th_wait:'Confirming your payment…',th_ok:'Payment received. Here is your license key:',th_copy:'Copy key',th_copied:'Copied',
  th_how:'How to activate',th_1:'Open PDF Lite.',th_2:'Click the "Trial" label at the top (or Tools → License).',th_3:'Paste the key and press Activate.',
- th_mail:'We also sent the key to your email. Keep it somewhere safe.',th_bad:'We could not confirm this payment yet. If you paid, wait a minute and refresh, or message us on WhatsApp with your email.',th_none:'No payment found. Go back to the website to buy a license.',th_home:'Back to the website'
+ th_mail:'We also sent the key to your email. Keep it somewhere safe.',th_auto:'PDF Lite will activate itself within a few seconds. You can close this page. The key below is only a backup.',th_bad:'We could not confirm this payment yet. If you paid, wait a minute and refresh, or message us on WhatsApp with your email.',th_none:'No payment found. Go back to the website to buy a license.',th_home:'Back to the website'
 },ar:{
  nav_features:'المميزات',nav_pricing:'السعر',nav_faq:'الأسئلة',nav_dl:'تنزيل',
  h1:'قارئ PDF يفتح فوراً.',lead:'برنامج PDF سريع وبسيط لنظام ويندوز، فيه كل ما يحتاجه فريق الموقع: تعليقات وقياس وأختام وتواقيع ودمج وتقسيم وضغط وتعرّف على النصوص. ملفاتك لا تغادر جهازك.',
@@ -57,8 +57,9 @@ const T={en:{
  f_terms:'الشروط',f_priv:'الخصوصية',f_ref:'الاسترجاع',f_help:'الدعم عبر واتساب',f_app:'استخدمه من المتصفح',
  th_h:'شكراً لك!',th_wait:'جارٍ تأكيد الدفع…',th_ok:'تم استلام الدفع. هذا هو مفتاح الترخيص:',th_copy:'نسخ المفتاح',th_copied:'تم النسخ',
  th_how:'طريقة التفعيل',th_1:'افتح PDF Lite.',th_2:'انقر على كلمة «تجربة» في الأعلى (أو الأدوات ← الترخيص).',th_3:'الصق المفتاح واضغط «تفعيل».',
- th_mail:'أرسلنا المفتاح أيضاً إلى بريدك. احتفظ به في مكان آمن.',th_bad:'لم نتمكن من تأكيد الدفع بعد. إذا دفعت فانتظر دقيقة وحدّث الصفحة، أو راسلنا على واتساب مع بريدك.',th_none:'لا توجد عملية دفع. ارجع إلى الموقع لشراء ترخيص.',th_home:'العودة إلى الموقع'
+ th_mail:'أرسلنا المفتاح أيضاً إلى بريدك. احتفظ به في مكان آمن.',th_auto:'سيفعّل PDF Lite نفسه خلال ثوانٍ. يمكنك إغلاق هذه الصفحة. المفتاح أدناه للاحتياط فقط.',th_bad:'لم نتمكن من تأكيد الدفع بعد. إذا دفعت فانتظر دقيقة وحدّث الصفحة، أو راسلنا على واتساب مع بريدك.',th_none:'لا توجد عملية دفع. ارجع إلى الموقع لشراء ترخيص.',th_home:'العودة إلى الموقع'
 }};
+try{const dv=new URLSearchParams(location.search).get('d');if(/^[a-z2-7]{20,40}$/.test(dv||''))localStorage.setItem('pl_dev',dv)}catch(e){}
 let L='en';try{L=localStorage.plsite||((navigator.language||'').toLowerCase().startsWith('ar')?'ar':'en')}catch(e){}
 function setLang(l){L=l;try{localStorage.plsite=l}catch(e){}
  document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';
@@ -85,7 +86,7 @@ if(go)go.onclick=async()=>{
  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)||em.length>120){err.textContent=T[L].e_mail;return}
  err.textContent=T[L].e_wait;go.disabled=true;
  try{
-  const r=await fetch(P.API+'/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:em,lang:L})});
+  const r=await fetch(P.API+'/api/checkout',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email:em,lang:L,device:(()=>{try{return localStorage.getItem('pl_dev')||''}catch(e){return''}})()})});
   const j=await r.json();if(!r.ok||!j.url||!j.id)throw 0;
   try{localStorage.setItem('pl_order',JSON.stringify({id:j.id,t:Date.now()}))}catch(e){}
   location.href=j.url;

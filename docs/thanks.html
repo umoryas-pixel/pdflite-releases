@@ -7,6 +7,7 @@
  <h1 data-t="th_h">Thank you!</h1>
  <p id="st" data-t="th_wait">Confirming your payment…</p>
  <div id="ok" hidden>
+  <p data-t="th_auto" id="auto" hidden style="color:var(--ok);font-weight:600"></p>
   <p data-t="th_ok"></p>
   <div class="key" id="key"></div>
   <p><button class="btn" id="cp" type="button" data-t="th_copy">Copy key</button></p>
@@ -25,7 +26,7 @@
  if(!id){st.textContent=plT('th_none');return}
  for(let i=0;i<8;i++){
   try{const r=await fetch(P.API+'/api/claim?invoice='+encodeURIComponent(id)),j=await r.json();
-   if(r.ok&&j.key){st.hidden=true;document.getElementById('ok').hidden=false;document.getElementById('key').textContent=j.key;
+   if(r.ok&&j.key){st.hidden=true;document.getElementById('ok').hidden=false;document.getElementById('key').textContent=j.key;document.getElementById('auto').hidden=!j.auto;
     document.getElementById('cp').onclick=async e=>{try{await navigator.clipboard.writeText(j.key)}catch(x){const s=getSelection(),g=document.createRange();g.selectNodeContents(document.getElementById('key'));s.removeAllRanges();s.addRange(g);document.execCommand('copy')}e.target.textContent=plT('th_copied')};
     try{localStorage.removeItem('pl_order')}catch(e){}return}
    if(r.status===404||r.status===400)break;
