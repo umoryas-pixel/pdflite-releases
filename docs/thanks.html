@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your PDF Lite license</title><meta name="robots" content="noindex"><link rel="icon" href="icons/icon-192.png"><link rel="stylesheet" href="style.css"></head>
+<title>Your Rasm license</title><meta name="robots" content="noindex"><link rel="icon" href="icons/icon-192.png"><link rel="stylesheet" href="style.css"></head>
 <body>
-<header class="top"><div class="wrap"><a class="logo" href="./"><i>PDF</i>PDF Lite</a><nav><button class="lang" type="button">العربية</button></nav></div></header>
+<header class="top"><div class="wrap"><a class="logo" href="./"><i>R</i>Rasm</a><nav><button class="lang" type="button">العربية</button></nav></div></header>
 <div class="page">
  <h1 data-t="th_h">Thank you!</h1>
  <p id="st" data-t="th_wait">Confirming your payment…</p>
@@ -21,11 +21,11 @@
 <script>
 (async()=>{
  const P=window.PL,q=new URLSearchParams(location.search),st=document.getElementById('st');
- let id=q.get('invoice_id')||q.get('invoice')||q.get('id');
+ let id=q.get('checkout_id')||q.get('invoice_id')||q.get('invoice')||q.get('id');
  if(!id){try{id=(JSON.parse(localStorage.getItem('pl_order')||'{}')||{}).id}catch(e){}}
  if(!id){st.textContent=plT('th_none');return}
  for(let i=0;i<8;i++){
-  try{const r=await fetch(P.API+'/api/claim?invoice='+encodeURIComponent(id)),j=await r.json();
+  try{const r=await fetch(P.API+'/api/claim?checkout_id='+encodeURIComponent(id)),j=await r.json();
    if(r.ok&&j.key){st.hidden=true;document.getElementById('ok').hidden=false;document.getElementById('key').textContent=j.key;document.getElementById('auto').hidden=!j.auto;
     document.getElementById('cp').onclick=async e=>{try{await navigator.clipboard.writeText(j.key)}catch(x){const s=getSelection(),g=document.createRange();g.selectNodeContents(document.getElementById('key'));s.removeAllRanges();s.addRange(g);document.execCommand('copy')}e.target.textContent=plT('th_copied')};
     try{localStorage.removeItem('pl_order')}catch(e){}return}

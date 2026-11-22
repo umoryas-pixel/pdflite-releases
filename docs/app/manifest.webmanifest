@@ -1,6 +1,6 @@
 {
-  "name": "PDF Lite",
-  "short_name": "PDF Lite",
+  "name": "Rasm",
+  "short_name": "Rasm",
   "description": "Fast, minimal PDF viewer with markup, measure, stamps and PDF tools.",
   "start_url": "./",
   "scope": "./",

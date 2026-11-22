@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>PDF Lite</title>
+<html lang="en"><head><meta charset="utf-8"><title>Rasm</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-:root{--bg:#fff;--fg:#1c1c1e;--mut:#8a8a8e;--line:#e4e4e7;--acc:#2563eb;--card:#f4f4f5;--view:#e9e9ec;--hit:#ffe14d99;--cur:#ff8a00aa;--sel:#2563eb55}
-@media(prefers-color-scheme:dark){:root{--bg:#18181b;--fg:#f4f4f5;--mut:#9a9aa0;--line:#2c2c31;--card:#232327;--view:#101012;--hit:#ffd60a66;--cur:#ff9f0abb;--sel:#4d8dff66}}
+:root{--bg:#fff;--fg:#1c1c1e;--mut:#52525b;--line:#e4e4e7;--acc:#2563eb;--card:#f4f4f5;--view:#e9e9ec;--hit:#ffe14d99;--cur:#ff8a00aa;--sel:#2563eb55}
+@media(prefers-color-scheme:dark){:root{--bg:#18181b;--fg:#f4f4f5;--mut:#a1a1aa;--line:#2c2c31;--card:#232327;--view:#101012;--hit:#ffd60a66;--cur:#ff9f0abb;--sel:#4d8dff66}}
 *{box-sizing:border-box}[hidden]{display:none!important}
 html,body{height:100%;margin:0;touch-action:pan-x pan-y}
 body{font:14px system-ui,'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;overflow:hidden}
@@ -144,10 +144,11 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
 #side{position:absolute;z-index:7;left:0;top:0;bottom:0;width:78%;max-width:300px;background:var(--bg);box-shadow:0 0 24px #0004}
 #wrap{position:relative}dialog{max-width:94vw}#mk{max-width:98%}#mk button{padding:8px 10px}
 }
+.szp{display:flex;gap:4px;margin:4px;align-items:center}.szp input{width:60px;text-align:center;padding:4px;border:1px solid var(--bd,#ccc);border-radius:6px;background:transparent;color:inherit}.szp button{min-width:30px;text-align:center}
 </style></head><body>
 <header>
   <button id="bSide" class="doc" title="Pages, bookmarks and markups (Ctrl+B)"><svg class="ic" style="margin:0;width:18px;height:18px" viewBox="0 0 24 24"><rect class="f" x="3" y="4" width="18" height="16" rx="2"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg></button>
-  <div id="title">PDF Lite</div>
+  <div id="title">Rasm</div>
   <div id="pager" class="grp doc"><input id="pg" value="1"> / <span id="pn">0</span></div>
   <div class="grp doc"><button id="bZm" title="Zoom out">−</button><span id="zv">100%</span><button id="bZp" title="Zoom in">+</button><button id="bFit" title="Page size: fit width, fit page, A4, actual size (Ctrl+0 = fit width)">Fit width ▾</button></div>
   <div class="grp doc"><button id="bRotL" title="Rotate this page left">↺</button><button id="bRotR" title="Rotate this page right">↻</button></div>
@@ -179,14 +180,14 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
       <button id="bMeas" title="Measure length and area">Measure</button>
       <button id="bStamp" title="Stamps">Stamp</button>
       <button id="bSign" title="Signature">Sign</button>
-      <span class="sep"></span><span class="swg"></span><button id="bSz" title="Size of new marks: S, M, L">M</button>
+      <span class="sep"></span><span class="swg"></span><button id="bSz" title="Size (number) of new marks, or of the selected mark">14</button>
       <span class="sep"></span>
       <button id="bUndo" disabled title="Undo (Ctrl+Z)">↶</button>
       <button id="bRedo" disabled title="Redo (Ctrl+Y)">↷</button>
       <button id="bDel" hidden title="Delete selected mark (Del)">✕</button>
     </div>
     <div id="empty"><div class="card">
-      <h2>PDF Lite</h2><p>A fast, simple PDF viewer with merge, split and compress.</p>
+      <h2>Rasm</h2><p>A fast, simple PDF viewer with merge, split and compress.</p>
       <button id="eOpen" class="pri">Open a PDF</button>
       <div class="hint">or drop a file anywhere · <a href="#" id="eKeys">keyboard shortcuts</a></div>
       <div id="rec"></div>
@@ -208,7 +209,7 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
   <div id="tocrBox" hidden>
     <p class="note" id="tocrInfo"></p>
     <select id="tlang"><option value="eng+ara">English + Arabic (recommended)</option><option value="eng">English only</option><option value="ara">Arabic only</option></select>
-    <label><input type="checkbox" id="tocrPdf"> <span>Also save a searchable PDF copy<br><small style="color:var(--mut)">English letters and numbers only. Arabic stays searchable inside PDF Lite.</small></span></label>
+    <label><input type="checkbox" id="tocrPdf"> <span>Also save a searchable PDF copy<br><small style="color:var(--mut)">English letters and numbers only. Arabic stays searchable inside Rasm.</small></span></label>
   </div>
   <div id="tmkbox" hidden>
     <label><input type="checkbox" id="mkNum" checked> Page numbers</label>
@@ -255,7 +256,7 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
   <h3><span id="lTitle">License</span> <button id="lX">✕</button></h3>
   <p id="lMsg" style="margin:0 0 10px;color:var(--mut);font-size:13px"></p>
   <div id="lForm"><input type="text" id="lKey" placeholder="Already have a key? Paste it here (PDFL-…)" spellcheck="false" autocomplete="off"></div>
-  <div id="lWait" hidden style="margin:0 0 8px;font-size:13px;color:var(--acc)">Waiting for your payment… PDF Lite activates itself when it arrives.</div>
+  <div id="lWait" hidden style="margin:0 0 8px;font-size:13px;color:var(--acc)">Waiting for your payment… Rasm activates itself when it arrives.</div>
   <div id="lErr" style="min-height:1.3em;font-size:13px;color:#dc2626;word-break:break-all"></div>
   <div id="lVer" style="margin:0 0 12px;font-size:12px;color:var(--mut)"><span id="vNum"></span> · <a href="#" id="lUpd">Check for updates</a> · <a href="#" id="lKeys">Shortcuts</a> <span id="uMsg"></span></div>
   <div class="row"><button id="lBuy">Buy a license</button><span class="grow"></span><button id="lOff" hidden>Remove license</button><button id="lAct" class="pri">Activate</button></div>
@@ -378,7 +379,7 @@ function licNow(){ // effective time never goes backwards, so turning the clock 
 function licParse(key){
   try{
     if(!LIC.PUB||!window.nacl)return{err:'Licensing is not configured in this build.'};
-    const k=String(key||'').replace(/\s+/g,'');if(!/^PDFL-/.test(k))return{err:'That does not look like a PDF Lite license key.'};
+    const k=String(key||'').replace(/\s+/g,'');if(!/^PDFL-/.test(k))return{err:'That does not look like a Rasm license key.'};
     const[a,b]=k.slice(5).split('.');if(!a||!b)return{err:'That key is incomplete. Copy the whole key.'};
     const m=b64b(a);if(!nacl.sign.detached.verify(m,b64b(b),Uint8Array.from(atob(LIC.PUB),c=>c.charCodeAt(0))))return{err:'This license key is not valid.'};
     const o=JSON.parse(new TextDecoder().decode(m));return{email:o.e,exp:+o.x||0}
@@ -395,9 +396,9 @@ function licUI(){
   chip.textContent=s.state==='licensed'?'Pro':'Trial · '+s.days+(s.days===1?' day':' days')+' left';
   $('#lTitle').textContent=s.state==='licensed'?'License':s.state==='trial'?'Free trial':s.lapsed?'License expired':'Trial ended';
   $('#lMsg').textContent=s.state==='licensed'?'Licensed to '+s.email+' · '+(s.exp?'valid until '+dayStr(s.exp):'lifetime license')+'.'
-    :s.state==='trial'?s.days+(s.days===1?' day':' days')+' left in your free trial. Pay once and PDF Lite activates itself. No key to type.'
+    :s.state==='trial'?s.days+(s.days===1?' day':' days')+' left in your free trial. Pay once and Rasm activates itself. No key to type.'
     :s.lapsed?'Your license expired on '+dayStr(s.exp)+'. Renew it, then paste the new key below.'
-    :'Your '+LIC.TRIAL_DAYS+'-day free trial has ended. Buy a license: PDF Lite activates itself after payment.';
+    :'Your '+LIC.TRIAL_DAYS+'-day free trial has ended. Buy a license: Rasm activates itself after payment.';
   const lic=s.state==='licensed';$('#lForm').hidden=lic;$('#lAct').hidden=lic;$('#lBuy').hidden=lic;$('#lOff').hidden=!lic;$('#lX').hidden=licLocked;
   if(licLocked&&!dlg.open)dlg.showModal()}
 function devId(){let d=localStorage.pl_dev;if(!/^[a-z2-7]{20,}$/.test(d||'')){const a=crypto.getRandomValues(new Uint8Array(16)),A='abcdefghijklmnopqrstuvwxyz234567';d='';for(const x of a)d+=A[x&31]+A[(x>>3)&31];localStorage.pl_dev=d=d.slice(0,26)}return d}
@@ -427,7 +428,7 @@ $('#lOff').onclick=()=>{localStorage.removeItem('pl_k');licUI()};
 licUI();setInterval(licUI,6e5);addEventListener('focus',licUI);
 setTimeout(()=>{if(licStatus().state!=='licensed'){if(localStorage.pl_dev)licCheck();if(+localStorage.pl_wait>Date.now()-864e5&&!actTimer)startWait()}},4000);
 addEventListener('focus',()=>{if(+localStorage.pl_wait>Date.now()-864e5&&licStatus().state!=='licensed')licCheck()});
-const NEWS={'0.6.1':['No more license keys to type: after you pay, PDF Lite activates itself within seconds.'],'0.6.0':['Buy online: the Buy button now opens the PDF Lite website, where you pay with mada, Apple Pay or card and get your license key instantly.'],'0.5.3':['A small, quiet notice tells you when a new version is available. It appears at most once a day, never over your work, and you can choose Later or Skip this version.'],'0.5.2':['Text selection and highlights now follow the text lines neatly, with no stray wide bands on documents with unusual fonts.'],'0.5.1':['The Tools window now shows its tabs in a neat grid instead of a scrolling row.'],'0.5.0':['Arabic interface: switch between English and العربية from the page-size menu (the Fit button). It opens in Arabic automatically on Arabic computers.'],'0.4.0':['Tabs: open several PDFs in one window and switch between them. Ctrl+Tab changes tab, Ctrl+W closes one.','OCR: read text from scanned pages (English and Arabic) so you can search and copy it. Tools, then OCR.'],'0.3.0':['Save as: choose a name and place for a copy of your PDF, with markup included (Ctrl+S).','Night mode for pages and Full screen, both in the Fit menu. F11 toggles full screen.','Move around a page by holding Space and dragging, or with the middle mouse button. Home and End jump to the first and last page.','New tools: save PDF pages as pictures (ZIP), and add page numbers and a watermark.'],'0.2.5':['Opening another PDF now opens it in its own window, so you can keep several open side by side.','Zooming in keeps text and lines sharp at any zoom level.'],'0.2.4':['Merge now repairs PDFs with an unusual structure instead of failing.'],'0.2.3':['PDF Lite now also runs on phones and tablets (Android and iPhone) as an installable web app.','Draw and mark up with your finger on touchscreens.'],'0.2.2':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.1':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.0':['Print your PDFs, with or without your markup (Print button or Ctrl+P).','Markups panel in the sidebar: every highlight, note, shape, measurement and stamp in one list, with filters.','Export the markup list to a spreadsheet that opens in Excel.','New Count tool for counting items on drawings (Measure, then Count, or press N).','Turn photos into a PDF in Tools, then Images. Phone photos come out the right way up.'],'0.1.1':['Underline and strikethrough tools. Click Highlight again to switch (keys H, U, S).','Rotate and Delete pages added to Tools.','PDFs reopen on the page and zoom where you left off.','Keyboard shortcuts for every tool. Press ? to see them.','Safer zooming on very large pages.']};
+const NEWS={'0.7.1':['Sizes are now numbers, and you can change the size of a mark after drawing it: select it, then set the number. Colour works the same way.'],'0.7.0':['PDF Lite is now Rasm: new name, new icon, clearer text, and a worldwide card checkout. Pay and the app activates itself.'],'0.6.1':['No more license keys to type: after you pay, Rasm activates itself within seconds.'],'0.6.0':['Buy online: the Buy button now opens the Rasm website, where you pay with mada, Apple Pay or card and get your license key instantly.'],'0.5.3':['A small, quiet notice tells you when a new version is available. It appears at most once a day, never over your work, and you can choose Later or Skip this version.'],'0.5.2':['Text selection and highlights now follow the text lines neatly, with no stray wide bands on documents with unusual fonts.'],'0.5.1':['The Tools window now shows its tabs in a neat grid instead of a scrolling row.'],'0.5.0':['Arabic interface: switch between English and العربية from the page-size menu (the Fit button). It opens in Arabic automatically on Arabic computers.'],'0.4.0':['Tabs: open several PDFs in one window and switch between them. Ctrl+Tab changes tab, Ctrl+W closes one.','OCR: read text from scanned pages (English and Arabic) so you can search and copy it. Tools, then OCR.'],'0.3.0':['Save as: choose a name and place for a copy of your PDF, with markup included (Ctrl+S).','Night mode for pages and Full screen, both in the Fit menu. F11 toggles full screen.','Move around a page by holding Space and dragging, or with the middle mouse button. Home and End jump to the first and last page.','New tools: save PDF pages as pictures (ZIP), and add page numbers and a watermark.'],'0.2.5':['Opening another PDF now opens it in its own window, so you can keep several open side by side.','Zooming in keeps text and lines sharp at any zoom level.'],'0.2.4':['Merge now repairs PDFs with an unusual structure instead of failing.'],'0.2.3':['Rasm now also runs on phones and tablets (Android and iPhone) as an installable web app.','Draw and mark up with your finger on touchscreens.'],'0.2.2':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.1':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.0':['Print your PDFs, with or without your markup (Print button or Ctrl+P).','Markups panel in the sidebar: every highlight, note, shape, measurement and stamp in one list, with filters.','Export the markup list to a spreadsheet that opens in Excel.','New Count tool for counting items on drawings (Measure, then Count, or press N).','Turn photos into a PDF in Tools, then Images. Phone photos come out the right way up.'],'0.1.1':['Underline and strikethrough tools. Click Highlight again to switch (keys H, U, S).','Rotate and Delete pages added to Tools.','PDFs reopen on the page and zoom where you left off.','Keyboard shortcuts for every tool. Press ? to see them.','Safer zooming on very large pages.']};
 (async()=>{try{const v=await T.app.getVersion(),last=localStorage.lastver;localStorage.lastver=v;
   if(v!==last&&!FIRST_RUN&&NEWS[v]&&!licLocked){$('#nVer').textContent=v;$('#nList').innerHTML=NEWS[v].map(x=>'<li>'+esc(x)+'</li>').join('');$('#dNew').showModal()}}catch(e){}})();
 $('#nOk').onclick=()=>$('#dNew').close();
@@ -444,12 +445,12 @@ async function checkUpdate(manual){
     say('Version '+u.version+' is available.');
     const go=async()=>{
       if(updBusy)return;
-      if(V.dirty&&!window.confirm('You have unsaved markup. Install the update anyway? PDF Lite will close.'))return;
+      if(V.dirty&&!window.confirm('You have unsaved markup. Install the update anyway? Rasm will close.'))return;
       updBusy=true;let tot=0,got=0;toast('Downloading update…',0);
       try{await u.downloadAndInstall(ev=>{
         if(ev.event==='Started')tot=ev.data.contentLength||0;
         else if(ev.event==='Progress'){got+=ev.data.chunkLength;if(tot)toast('Downloading update… '+Math.round(got/tot*100)+'%',0)}
-        else if(ev.event==='Finished')toast('Installing. PDF Lite will restart.',0)})}
+        else if(ev.event==='Finished')toast('Installing. Rasm will restart.',0)})}
       catch(e){updBusy=false;toast('The update could not be installed. Try again later.',5000)}};
     if($('#dLic').open){um.innerHTML='';const b=document.createElement('button');b.textContent='Install version '+u.version;b.style.marginLeft='6px';b.onclick=go;um.append(b)}
     else if(manual)toast('Version '+u.version+' is available',30000,{label:'Update now',fn:go});
@@ -481,7 +482,7 @@ if(T&&T.updater){setTimeout(()=>checkUpdate(false),20000);setInterval(()=>checkU
 /* ---------- phone / tablet: install as an app + draw with a finger ---------- */
 if(!T&&/^https?:$/.test(location.protocol)){
   const h=document.head,l=(r,hr)=>{const e=document.createElement('link');e.rel=r;e.href=hr;h.appendChild(e)},m=(n,c)=>{const e=document.createElement('meta');e.name=n;e.content=c;h.appendChild(e)};
-  l('manifest','manifest.webmanifest');l('apple-touch-icon','icons/apple-touch-icon.png');m('theme-color','#ffffff');m('apple-mobile-web-app-capable','yes');m('mobile-web-app-capable','yes');m('apple-mobile-web-app-title','PDF Lite');
+  l('manifest','manifest.webmanifest');l('apple-touch-icon','icons/apple-touch-icon.png');m('theme-color','#ffffff');m('apple-mobile-web-app-capable','yes');m('mobile-web-app-capable','yes');m('apple-mobile-web-app-title','Rasm');
   if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 }
 (function(){const v=$('#viewer');let on=false,tg=null;
@@ -510,7 +511,7 @@ async function openDoc(f,pwd,opts){
     }
     if(V.doc&&V.doc.destroy)V.doc.destroy();
     Object.assign(V,{ocr:null,pwd:pwd||null,rotBytes:rb,doc,native:!!sizes,sizes,base:b,fit:true,fitMode:'w',sel:null,hits:[],hi:-1,cur:1});V.cache.clear();
-    $('#title').textContent=f.name;document.title=f.name+' - PDF Lite';$('#pn').textContent=doc.numPages;
+    $('#title').textContent=f.name;document.title=f.name+' - Rasm';$('#pn').textContent=doc.numPages;
     $('#fc').textContent='';$('#q').value='';
     document.body.classList.add('has');loadMarks(f);const rp=getRp(f);fitScale();build();restoreRp(rp);buildSide();remember(f);setTool('select');updateSave();updateHistoryUi();toast('');ocrLoad(f);return true;
   }catch(e){
@@ -1019,7 +1020,7 @@ function redo(){
   if(!V.ann.find(a=>a.id===V.selId))V.selId=null;
   pg.forEach(paintAnn);V.dirty=true;persist();updateSave();updateHistoryUi();
 }
-function selectAnn(id){const old=V.ann.find(a=>a.id===V.selId);V.selId=id;if(old)paintAnn(old.p);const n=V.ann.find(a=>a.id===id);if(n)paintAnn(n.p);updateHistoryUi()}
+function selectAnn(id){const old=V.ann.find(a=>a.id===V.selId);V.selId=id;if(old)paintAnn(old.p);const n=V.ann.find(a=>a.id===id);if(n)paintAnn(n.p);updateHistoryUi();if(typeof syncSz==='function')syncSz()}
 function delSel(){const a=V.ann.find(x=>x.id===V.selId);if(!a)return;pushUndo();V.ann=V.ann.filter(x=>x!==a);V.selId=null;changed(a.p)}
 function moveAnn(a,dx,dy){const b={...a};
   if(a.rects)b.rects=a.rects.map(r=>[r[0]+dx,r[1]+dy,r[2]+dx,r[3]+dy]);
@@ -1052,7 +1053,7 @@ $('#mk .swg').innerHTML='<button id="bCol" title="Colour"><i></i></button>';setC
 const PAL=['#e11d48','#f97316','#f59e0b','#16a34a','#2563eb','#7c3aed','#111111','#6b7280'];
 $('#bCol').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop();return}
   showPop(b,'<div class="crow">'+PAL.map(c=>'<button class="csw'+(c===V.color?' on':'')+'" data-c="'+c+'" style="background:'+c+'" title="'+c+'"></button>').join('')+'</div><label class="cust">Custom <input type="color" value="'+(/^#[0-9a-f]{6}$/i.test(V.color)?V.color:'#e11d48')+'"></label>')};
-$('#pop').addEventListener('change',e=>{if(e.target.type==='color')setColor(e.target.value)});
+$('#pop').addEventListener('change',e=>{if(e.target.type==='color')setColor(e.target.value);else if(e.target.id==='szIn')setSz(e.target.value)});
 $('#bShape').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop();return}
   showPop(b,Object.keys(SH).map(k=>'<button data-sh="'+k+'">'+icon(SH[k][1])+SH[k][0]+'</button>').join(''))};
 [['#mk [data-tool="select"]','select'],['#mk [data-tool="hl"]','hl'],['#mk [data-tool="pen"]','pen'],['#mk [data-tool="text"]','text'],['#mk [data-tool="callout"]','callout'],['#bShape','shape'],['#bMeas','meas'],['#bStamp','stamp'],['#bSign','sign']]
@@ -1061,7 +1062,18 @@ $('#bShape').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop()
   bh.onclick=()=>{if(!$('#pop').hidden){hidePop();return}
     if(TM[V.tool])showPop(bh,Object.keys(TM).map(k=>'<button data-tm="'+k+'">'+icon(TM[k][1])+TM[k][0]+'</button>').join(''));
     else setTool(lastTM)}}
-$('#bSz').onclick=()=>{V.sz=V.sz===1?1.6:V.sz===1.6?.7:1;$('#bSz').textContent=V.sz===1?'M':V.sz>1?'L':'S'};
+const SZ0=14,szMin=4,szMax=120;
+function annSizeNum(a){const U=UN(a.p);if(a.type==='text'||a.type==='callout')return Math.round(a.size/U);if(a.type==='count')return Math.round(a.r/(7*U)*SZ0);if(a.type==='meas')return Math.round(a.w/(1.6*U)*SZ0);if(a.w&&a.type!=='img'&&a.type!=='hl'&&a.type!=='ul'&&a.type!=='st')return Math.round(a.w/(2*U)*SZ0);return null}
+function curSzNum(){const a=V.ann.find(x=>x.id===V.selId);const n=a?annSizeNum(a):null;return n!=null?n:Math.round(V.sz*SZ0)}
+function setSz(n){n=Math.max(szMin,Math.min(szMax,Math.round(+n)||SZ0));const a=V.ann.find(x=>x.id===V.selId);
+  if(a&&annSizeNum(a)!=null){const U=UN(a.p),k=n/SZ0;let u;
+    if(a.type==='text'||a.type==='callout')u={size:n*U};else if(a.type==='count')u={r:7*U*k};else if(a.type==='meas')u={w:1.6*U*k};else u={w:2*U*k};
+    pushUndo();V.ann[V.ann.indexOf(a)]={...a,...u};changed(a.p)}
+  else V.sz=n/SZ0;
+  $('#bSz').textContent=n;const i=$('#szIn');if(i)i.value=n}
+function syncSz(){$('#bSz').textContent=curSzNum()}
+$('#bSz').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop();return}
+  const n=curSzNum();showPop(b,'<div class="szp"><button data-sz="-1">\u2212</button><input id="szIn" type="number" min="'+szMin+'" max="'+szMax+'" value="'+n+'"><button data-sz="1">+</button></div><div class="szp">'+[8,10,12,14,18,24,36].map(v=>'<button data-sz="='+v+'">'+v+'</button>').join('')+'</div><div class="note">'+(V.selId?'Changes the selected mark':'Size of new marks')+'</div>')};
 
 /* popups */
 function showPop(btn,html){const p=$('#pop'),r=btn.getBoundingClientRect();p.innerHTML=html;p.hidden=false;if(btn.closest('#mk.v')){p.style.bottom='auto';p.style.left=Math.max(6,r.left>innerWidth/2?r.left-p.offsetWidth-8:r.right+8)+'px';p.style.top=Math.max(6,Math.min(r.top,innerHeight-p.offsetHeight-6))+'px';return}p.style.left=Math.max(6,Math.min(r.left,innerWidth-p.offsetWidth-6))+'px';if(r.top<p.offsetHeight+16){p.style.bottom='auto';p.style.top=(r.bottom+8)+'px'}else{p.style.top='auto';p.style.bottom=(innerHeight-r.top+8)+'px'}}
@@ -1093,6 +1105,7 @@ $('#bStamp').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop()
 $('#pop').onclick=e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.fit){hidePop();setFit(b.dataset.fit==='1'?'1':b.dataset.fit)}
   else if(b.dataset.act){hidePop();b.dataset.act==='dark'?toggleDark():b.dataset.act==='lang'?applyLang(LANG==='ar'?'en':'ar'):setFull(!FS)}
+  else if(b.dataset.sz){const d=b.dataset.sz;setSz(d[0]==='='?+d.slice(1):curSzNum()+(+d)*(curSzNum()>=36?4:curSzNum()>=14?2:1))}
   else if(b.dataset.c){setColor(b.dataset.c);hidePop()}
   else if(b.dataset.tm){setTool(b.dataset.tm)}
   else if(b.dataset.sh){setTool(b.dataset.sh);$('#bShape .ic').innerHTML=SH[b.dataset.sh][1]}
@@ -1345,7 +1358,7 @@ function closeDoc(){
   Array.from(pages()).forEach(undraw);if(V.io)V.io.disconnect();
   if(V.doc&&V.doc.destroy)V.doc.destroy();
   Object.assign(V,{doc:null,src:null,ann:[],undo:[],redo:[],cal:{def:null,pages:{}},selId:null,sel:null,hits:[],hi:-1,cur:1,native:false,sizes:null,rotBytes:null,ocr:null});
-  V.cache.clear();$('#viewer').innerHTML='';document.body.classList.remove('has');$('#title').textContent='PDF Lite';document.title='PDF Lite';$('#fc').textContent='';$('#findbar').hidden=true;showRecent()}
+  V.cache.clear();$('#viewer').innerHTML='';document.body.classList.remove('has');$('#title').textContent='Rasm';document.title='Rasm';$('#fc').textContent='';$('#findbar').hidden=true;showRecent()}
 function closeTab(t){
   const i=TABS.indexOf(t);if(i<0)return;
   if(t===curTab){TABS.splice(i,1);const nx=TABS[i]||TABS[i-1];curTab=null;if(nx)openTab(nx.f);else{closeDoc();renderTabs()}}
@@ -1729,7 +1742,7 @@ const AR={
 'Compress, merge, split':'ضغط ودمج وتقسيم','Turn photos and images into a PDF':'تحويل الصور إلى ملف PDF','Save PDF pages as JPG or PNG pictures (ZIP)':'حفظ صفحات PDF كصور JPG أو PNG (ملف ZIP)','Add page numbers and a watermark':'إضافة أرقام الصفحات وعلامة مائية','Read text in scanned pages so you can search and copy it':'قراءة النص في الصفحات الممسوحة ضوئياً للبحث فيه ونسخه',
 'JPG · standard (150 dpi)':'JPG · عادي (150 نقطة/بوصة)','JPG · high quality (220 dpi)':'JPG · جودة عالية (220 نقطة/بوصة)','PNG · lossless (150 dpi)':'PNG · بدون فقد (150 نقطة/بوصة)',
 'Page numbers':'أرقام الصفحات','Bottom centre':'أسفل الوسط','Bottom right':'أسفل اليمين','Bottom left':'أسفل اليسار','Top right':'أعلى اليمين','Page 1 of 10':'صفحة 1 من 10','Watermark: light grey':'العلامة: رمادي فاتح','Watermark: red':'العلامة: أحمر','Watermark text (optional), e.g. DRAFT':'نص العلامة المائية (اختياري)، مثل DRAFT',
-'English + Arabic (recommended)':'إنجليزي + عربي (موصى به)','English only':'الإنجليزية فقط','Arabic only':'العربية فقط','Also save a searchable PDF copy':'احفظ أيضاً نسخة PDF قابلة للبحث','English letters and numbers only. Arabic stays searchable inside PDF Lite.':'الحروف الإنجليزية والأرقام فقط. يبقى النص العربي قابلاً للبحث داخل PDF Lite.',
+'English + Arabic (recommended)':'إنجليزي + عربي (موصى به)','English only':'الإنجليزية فقط','Arabic only':'العربية فقط','Also save a searchable PDF copy':'احفظ أيضاً نسخة PDF قابلة للبحث','English letters and numbers only. Arabic stays searchable inside Rasm.':'الحروف الإنجليزية والأرقام فقط. يبقى النص العربي قابلاً للبحث داخل Rasm.',
 'Read text (OCR)':'قراءة النص (OCR)','Add to PDF':'إضافة إلى الملف','Save as pictures (ZIP)':'حفظ كصور (ZIP)','Create PDF':'إنشاء PDF','Delete pages':'حذف الصفحات','Extract pages':'استخراج الصفحات','Rotate pages':'تدوير الصفحات',
 'Pages to delete, e.g. 2, 4-6':'الصفحات المراد حذفها، مثل 2, 4-6','Pages to extract, e.g. 1-3, 5, 8-10':'الصفحات المراد استخراجها، مثل 1-3, 5, 8-10','Pages to mark (empty = all pages), e.g. 1-3, 5':'الصفحات المراد وسمها (فارغ = كل الصفحات)، مثل 1-3, 5','Pages to read (empty = every page without text), e.g. 1-3, 5':'الصفحات المراد قراءتها (فارغ = كل صفحة بلا نص)، مثل 1-3, 5','Pages to rotate (empty = all pages), e.g. 1-3, 5':'الصفحات المراد تدويرها (فارغ = الكل)، مثل 1-3, 5','Pages to save (empty = all pages), e.g. 1-3, 5':'الصفحات المراد حفظها (فارغ = الكل)، مثل 1-3, 5',
 'Rotate left 90°':'تدوير 90° لليسار','Rotate right 90°':'تدوير 90° لليمين','Rotate 180°':'تدوير 180°',
@@ -1741,13 +1754,13 @@ const AR={
 'Signature':'التوقيع','Type your name':'اكتب اسمك','Draw or type your signature first':'ارسم توقيعك أو اكتبه أولاً','Saved signatures':'التواقيع المحفوظة','My stamps':'أختامي','Name or company on stamps':'الاسم أو الشركة على الأختام',
 'Enter the real length of the line you just drew (a dimension you know on the drawing).':'أدخل الطول الحقيقي للخط الذي رسمته للتو (بُعد معروف في المخطط).','Use this scale for all pages':'استخدام هذا المقياس لكل الصفحات','Set the scale first: draw along a known length':'اضبط المقياس أولاً: ارسم خطاً على طول معروف','Scale not set':'لم يُضبط المقياس','Scale not set yet. Use "Set scale" first.':'لم يُضبط المقياس بعد. استخدم «ضبط المقياس» أولاً.','Scale set. Click two points to measure a length.':'تم ضبط المقياس. انقر نقطتين لقياس طول.','Enter the real length as a number':'أدخل الطول الحقيقي كرقم','Scale is set for this page.':'تم ضبط المقياس لهذه الصفحة.','Count totals:':'إجمالي العدّ:','cm':'سم','mm':'مم','in':'بوصة','ft':'قدم',
 'Buy a license':'شراء ترخيص','Remove license':'إزالة الترخيص','Check for updates':'التحقق من التحديثات','Paste your license key (PDFL-…)':'ألصق مفتاح الترخيص (PDFL-…)','License activated. Thank you!':'تم تفعيل الترخيص. شكراً لك!','This license key is not valid.':'مفتاح الترخيص هذا غير صالح.','This license key has expired.':'انتهت صلاحية مفتاح الترخيص هذا.','Licensing is not configured in this build.':'الترخيص غير مُعدّ في هذا الإصدار.',
-'Update now':'حدّث الآن','Downloading update…':'جارٍ تنزيل التحديث…','Installing. PDF Lite will restart.':'جارٍ التثبيت. سيُعاد تشغيل PDF Lite.','The update could not be installed. Try again later.':'تعذّر تثبيت التحديث. حاول لاحقاً.','You have the latest version.':'لديك أحدث إصدار.','Could not check for updates.':'تعذّر التحقق من التحديثات.','You have unsaved markup. Install the update anyway? PDF Lite will close.':'لديك تعليقات غير محفوظة. هل تريد تثبيت التحديث؟ سيُغلق PDF Lite.',
+'Update now':'حدّث الآن','Downloading update…':'جارٍ تنزيل التحديث…','Installing. Rasm will restart.':'جارٍ التثبيت. سيُعاد تشغيل Rasm.','The update could not be installed. Try again later.':'تعذّر تثبيت التحديث. حاول لاحقاً.','You have the latest version.':'لديك أحدث إصدار.','Could not check for updates.':'تعذّر التحقق من التحديثات.','You have unsaved markup. Install the update anyway? Rasm will close.':'لديك تعليقات غير محفوظة. هل تريد تثبيت التحديث؟ سيُغلق Rasm.',
 'What\'s new in':'الجديد في',
 // toasts and messages
 'Opening…':'جارٍ الفتح…','Saving…':'جارٍ الحفظ…','Saved':'تم الحفظ','Saved with your markup':'تم الحفظ مع تعليقاتك','Open copy':'فتح النسخة','Save cancelled':'أُلغي الحفظ','Could not save the file':'تعذّر حفظ الملف','Copied':'تم النسخ','No text to copy':'لا يوجد نص للنسخ','Nothing to export':'لا يوجد ما يمكن تصديره','Click on the page to place it':'انقر على الصفحة لوضعه','That image looks empty':'تبدو هذه الصورة فارغة','Could not read that image':'تعذّر قراءة هذه الصورة','Could not draw markup':'تعذّر رسم التعليق','Could not keep markup between sessions (storage full)':'تعذّر حفظ التعليقات بين الجلسات (التخزين ممتلئ)','Storage is full — remove a saved stamp':'التخزين ممتلئ — احذف ختماً محفوظاً','Could not prepare the pages for printing.':'تعذّر تجهيز الصفحات للطباعة.','Export the markup list to a spreadsheet that opens in Excel.':'تصدير قائمة التعليقات إلى جدول بيانات يُفتح في Excel.','CSV spreadsheet':'جدول CSV','ZIP archive':'أرشيف ZIP',
 'Copy':'نسخ','Export':'تصدير','All markup':'كل التعليقات','Notes and callouts':'الملاحظات والتعليقات','Shapes and pen':'الأشكال والقلم','Stamps and signatures':'الأختام والتواقيع','Measure and count':'القياس والعدّ','Notes':'الملاحظات','Sort':'ترتيب','Filter':'تصفية',
 'APPROVED AS NOTED':'معتمد مع الملاحظات','APPROVED':'معتمد','REJECTED':'مرفوض','FOR CONSTRUCTION':'للتنفيذ','FOR INFORMATION':'للعلم','DRAFT':'مسودة','VOID':'ملغى','REVISE':'يُعدَّل',
-'Scale not set yet':'لم يُضبط المقياس بعد','Colour':'اللون','Waiting for your payment… PDF Lite activates itself when it arrives.':'بانتظار الدفع… سيفعّل PDF Lite نفسه تلقائياً عند وصوله.','Already have a key? Paste it here (PDFL-…)':'لديك مفتاح؟ الصقه هنا (PDFL-…)','It takes a few seconds and keeps your settings.':'يستغرق ثوانٍ قليلة ولا يؤثر على إعداداتك.','Later':'لاحقاً','Skip this version':'تخطّي هذا الإصدار','Close':'إغلاق','Close (Ctrl+W)':'إغلاق (Ctrl+W)','Open another PDF (Ctrl+O)':'فتح ملف PDF آخر (Ctrl+O)','Open another PDF':'فتح ملف PDF آخر'
+'Scale not set yet':'لم يُضبط المقياس بعد','Colour':'اللون','Changes the selected mark':'يغيّر العلامة المحددة','Size of new marks':'حجم العلامات الجديدة','Size (number) of new marks, or of the selected mark':'الحجم (رقم) للعلامات الجديدة أو للعلامة المحددة','Waiting for your payment… Rasm activates itself when it arrives.':'بانتظار الدفع… سيفعّل Rasm نفسه تلقائياً عند وصوله.','Already have a key? Paste it here (PDFL-…)':'لديك مفتاح؟ الصقه هنا (PDFL-…)','It takes a few seconds and keeps your settings.':'يستغرق ثوانٍ قليلة ولا يؤثر على إعداداتك.','Later':'لاحقاً','Skip this version':'تخطّي هذا الإصدار','Close':'إغلاق','Close (Ctrl+W)':'إغلاق (Ctrl+W)','Open another PDF (Ctrl+O)':'فتح ملف PDF آخر (Ctrl+O)','Open another PDF':'فتح ملف PDF آخر'
 };
 const ARP=[
  [/^✓ (.+)$/,(m,a)=>'✓ '+(trStr(a)||a)],
@@ -1784,8 +1797,8 @@ const ARP=[
  [/^Version ([\d.]+) is available\.?$/,'الإصدار $1 متاح'],
  [/^Version ([\d.]+)$/,'الإصدار $1'],
  [/^Trial · (\d+) days? left$/,(m,d)=>'تجربة · متبقٍ '+d+(d==1?' يوم':' أيام')],
- [/^(\d+) days? left in your free trial\. Pay once and PDF Lite activates itself\. No key to type\.$/,'متبقٍ $1 أيام في تجربتك المجانية. ادفع مرة واحدة ويفعّل PDF Lite نفسه تلقائياً دون إدخال مفتاح.'],
- [/^Your (\d+)-day free trial has ended\. Buy a license: PDF Lite activates itself after payment\.$/,'انتهت تجربتك المجانية ($1 يوماً). اشترِ ترخيصاً وسيفعّل PDF Lite نفسه بعد الدفع.'],
+ [/^(\d+) days? left in your free trial\. Pay once and Rasm activates itself\. No key to type\.$/,'متبقٍ $1 أيام في تجربتك المجانية. ادفع مرة واحدة ويفعّل Rasm نفسه تلقائياً دون إدخال مفتاح.'],
+ [/^Your (\d+)-day free trial has ended\. Buy a license: Rasm activates itself after payment\.$/,'انتهت تجربتك المجانية ($1 يوماً). اشترِ ترخيصاً وسيفعّل Rasm نفسه بعد الدفع.'],
  [/^Licensed to (.+) · (valid until .+|lifetime license)\.$/,(m,e,v)=>'مرخّص لـ '+e+' · '+(/^valid until/.test(v)?'صالح حتى'+v.slice(11):'ترخيص دائم')+'.'],
  [/^Your license expired on (.+)\. Renew it, then paste the new key below\.$/,'انتهى ترخيصك في $1. جدّده ثم ألصق المفتاح الجديد أدناه.'],
  [/^p\. (\d+)$/,'ص $1'],
