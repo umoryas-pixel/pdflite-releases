@@ -428,7 +428,7 @@ $('#lOff').onclick=()=>{localStorage.removeItem('pl_k');licUI()};
 licUI();setInterval(licUI,6e5);addEventListener('focus',licUI);
 setTimeout(()=>{if(licStatus().state!=='licensed'){if(localStorage.pl_dev)licCheck();if(+localStorage.pl_wait>Date.now()-864e5&&!actTimer)startWait()}},4000);
 addEventListener('focus',()=>{if(+localStorage.pl_wait>Date.now()-864e5&&licStatus().state!=='licensed')licCheck()});
-const NEWS={'0.7.2':['The new Rasm icon now shows everywhere: the app, the installer, the website and your phone home screen.'],'0.7.1':['Sizes are now numbers, and you can change the size of a mark after drawing it: select it, then set the number. Colour works the same way.'],'0.7.0':['PDF Lite is now Rasm: new name, new icon, clearer text, and a worldwide card checkout. Pay and the app activates itself.'],'0.6.1':['No more license keys to type: after you pay, Rasm activates itself within seconds.'],'0.6.0':['Buy online: the Buy button now opens the Rasm website, where you pay with mada, Apple Pay or card and get your license key instantly.'],'0.5.3':['A small, quiet notice tells you when a new version is available. It appears at most once a day, never over your work, and you can choose Later or Skip this version.'],'0.5.2':['Text selection and highlights now follow the text lines neatly, with no stray wide bands on documents with unusual fonts.'],'0.5.1':['The Tools window now shows its tabs in a neat grid instead of a scrolling row.'],'0.5.0':['Arabic interface: switch between English and العربية from the page-size menu (the Fit button). It opens in Arabic automatically on Arabic computers.'],'0.4.0':['Tabs: open several PDFs in one window and switch between them. Ctrl+Tab changes tab, Ctrl+W closes one.','OCR: read text from scanned pages (English and Arabic) so you can search and copy it. Tools, then OCR.'],'0.3.0':['Save as: choose a name and place for a copy of your PDF, with markup included (Ctrl+S).','Night mode for pages and Full screen, both in the Fit menu. F11 toggles full screen.','Move around a page by holding Space and dragging, or with the middle mouse button. Home and End jump to the first and last page.','New tools: save PDF pages as pictures (ZIP), and add page numbers and a watermark.'],'0.2.5':['Opening another PDF now opens it in its own window, so you can keep several open side by side.','Zooming in keeps text and lines sharp at any zoom level.'],'0.2.4':['Merge now repairs PDFs with an unusual structure instead of failing.'],'0.2.3':['Rasm now also runs on phones and tablets (Android and iPhone) as an installable web app.','Draw and mark up with your finger on touchscreens.'],'0.2.2':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.1':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.0':['Print your PDFs, with or without your markup (Print button or Ctrl+P).','Markups panel in the sidebar: every highlight, note, shape, measurement and stamp in one list, with filters.','Export the markup list to a spreadsheet that opens in Excel.','New Count tool for counting items on drawings (Measure, then Count, or press N).','Turn photos into a PDF in Tools, then Images. Phone photos come out the right way up.'],'0.1.1':['Underline and strikethrough tools. Click Highlight again to switch (keys H, U, S).','Rotate and Delete pages added to Tools.','PDFs reopen on the page and zoom where you left off.','Keyboard shortcuts for every tool. Press ? to see them.','Safer zooming on very large pages.']};
+const NEWS={'0.7.3':['Text selection and highlighting now follow the rows of tables and spreadsheets, and the selection stays aligned while you zoom.'],'0.7.2':['The new Rasm icon now shows everywhere: the app, the installer, the website and your phone home screen.'],'0.7.1':['Sizes are now numbers, and you can change the size of a mark after drawing it: select it, then set the number. Colour works the same way.'],'0.7.0':['PDF Lite is now Rasm: new name, new icon, clearer text, and a worldwide card checkout. Pay and the app activates itself.'],'0.6.1':['No more license keys to type: after you pay, Rasm activates itself within seconds.'],'0.6.0':['Buy online: the Buy button now opens the Rasm website, where you pay with mada, Apple Pay or card and get your license key instantly.'],'0.5.3':['A small, quiet notice tells you when a new version is available. It appears at most once a day, never over your work, and you can choose Later or Skip this version.'],'0.5.2':['Text selection and highlights now follow the text lines neatly, with no stray wide bands on documents with unusual fonts.'],'0.5.1':['The Tools window now shows its tabs in a neat grid instead of a scrolling row.'],'0.5.0':['Arabic interface: switch between English and العربية from the page-size menu (the Fit button). It opens in Arabic automatically on Arabic computers.'],'0.4.0':['Tabs: open several PDFs in one window and switch between them. Ctrl+Tab changes tab, Ctrl+W closes one.','OCR: read text from scanned pages (English and Arabic) so you can search and copy it. Tools, then OCR.'],'0.3.0':['Save as: choose a name and place for a copy of your PDF, with markup included (Ctrl+S).','Night mode for pages and Full screen, both in the Fit menu. F11 toggles full screen.','Move around a page by holding Space and dragging, or with the middle mouse button. Home and End jump to the first and last page.','New tools: save PDF pages as pictures (ZIP), and add page numbers and a watermark.'],'0.2.5':['Opening another PDF now opens it in its own window, so you can keep several open side by side.','Zooming in keeps text and lines sharp at any zoom level.'],'0.2.4':['Merge now repairs PDFs with an unusual structure instead of failing.'],'0.2.3':['Rasm now also runs on phones and tablets (Android and iPhone) as an installable web app.','Draw and mark up with your finger on touchscreens.'],'0.2.2':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.1':['Smoother pinch and trackpad zoom: the page follows your fingers, then sharpens.','Rotate left and Rotate right buttons in the header turn the page you are on straight away. Your markup turns with it.','Fixed: exporting the markup list to a spreadsheet now saves correctly.'],'0.2.0':['Print your PDFs, with or without your markup (Print button or Ctrl+P).','Markups panel in the sidebar: every highlight, note, shape, measurement and stamp in one list, with filters.','Export the markup list to a spreadsheet that opens in Excel.','New Count tool for counting items on drawings (Measure, then Count, or press N).','Turn photos into a PDF in Tools, then Images. Phone photos come out the right way up.'],'0.1.1':['Underline and strikethrough tools. Click Highlight again to switch (keys H, U, S).','Rotate and Delete pages added to Tools.','PDFs reopen on the page and zoom where you left off.','Keyboard shortcuts for every tool. Press ? to see them.','Safer zooming on very large pages.']};
 (async()=>{try{const v=await T.app.getVersion(),last=localStorage.lastver;localStorage.lastver=v;
   if(v!==last&&!FIRST_RUN&&NEWS[v]&&!licLocked){$('#nVer').textContent=v;$('#nList').innerHTML=NEWS[v].map(x=>'<li>'+esc(x)+'</li>').join('');$('#dNew').showModal()}}catch(e){}})();
 $('#nOk').onclick=()=>$('#dNew').close();
@@ -764,7 +764,7 @@ $('#prGo').onclick=async()=>{
 /* ---------- overlays: search hits + text selection ---------- */
 function paintPage(n){
   const d=pages()[n-1];if(!d)return;const s=V.scale,H=pageH(n);let h='';
-  const box=(l,b,r,t,c)=>'<i class="'+c+'" style="left:'+l*s+'px;top:'+(H-t)*s+'px;width:'+(r-l)*s+'px;height:'+(t-b)*s+'px"></i>';
+  const W=pageW(n),pc=v=>(+v.toFixed(4))+'%',box=(l,b,r,t,c)=>'<i class="'+c+'" style="left:'+pc(l/W*100)+';top:'+pc((H-t)/H*100)+';width:'+pc((r-l)/W*100)+';height:'+pc((t-b)/H*100)+'"></i>';
   V.hits.forEach((x,i)=>{if(x[0]===n-1)h+=box(x[1],x[2],x[3],x[4],i===V.hi?'hit cur':'hit')});
   selLines(n).forEach(g=>h+=box(g.l,g.b,g.r,g.t,'sel'));
   d.firstChild.innerHTML=h;
@@ -774,23 +774,38 @@ function selLines(n){
   if(!V.sel||V.sel.n!==n)return[];
   const ch=V.cache.get(n)||[],lo=Math.min(V.sel.a,V.sel.b),hi=Math.max(V.sel.a,V.sel.b);
   const ws=c=>/^\s*$/.test(c[0]);const med=a=>{a=a.slice().sort((x,y)=>x-y);return a[a.length>>1]};
-  const lines=[];let g=null;
+  const lines=[];
   for(let i=lo;i<=hi;i++){const c=ch[i];if(!c||c[3]-c[1]<=0||c[4]-c[2]<=0)continue;
-    if(ws(c)&&(!g||c[3]-c[1]>(c[4]-c[2])*1.2))continue;           /* line breaks / oversized blanks */
+    if(ws(c))continue;
     const mid=(c[2]+c[4])/2;
-    if(g&&mid>g.ref[0]&&mid<g.ref[1])g.cs.push(c);
-    else{if(ws(c))continue;g={ref:[c[2],c[4]],cs:[c]};lines.push(g)}}
+    /* join ANY existing line whose band holds this character (text order may jump between cells) */
+    let g=null;for(const L of lines)if(mid>L.ref[0]&&mid<L.ref[1]){g=L;break}
+    if(g)g.cs.push(c);else lines.push({ref:[c[2],c[4]],cs:[c]})}
   const out=[];
   for(const L of lines){
-    let cs=L.cs;while(cs.length&&ws(cs[cs.length-1]))cs=cs.slice(0,-1);if(!cs.length)continue;
-    const ink=cs.filter(c=>!ws(c));
-    out.push({l:Math.min(...cs.map(c=>c[1])),r:Math.max(...cs.map(c=>c[3])),b:med(ink.map(c=>c[2])),t:med(ink.map(c=>c[4]))})}
+    const cs=L.cs.slice().sort((x,y)=>x[1]-y[1]);
+    const b=med(cs.map(c=>c[2])),t=med(cs.map(c=>c[4])),gap=Math.max(4*(t-b),1);
+    let seg=null;
+    const flush=()=>{if(seg)out.push({l:seg.l,r:seg.r,b,t});seg=null};
+    for(const c of cs){if(seg&&c[1]-seg.r>gap)flush();if(!seg)seg={l:c[1],r:c[3]};else{seg.l=Math.min(seg.l,c[1]);seg.r=Math.max(seg.r,c[3])}}
+    flush()}
+  return out;
+}
+/* tables exported column by column come out of PDFium in a jumbled order: put them in reading order */
+function readingOrder(ch){
+  const ok=ch.filter(c=>c[3]-c[1]>0&&c[4]-c[2]>0);if(ok.length<40)return ch;
+  const mid=c=>(c[2]+c[4])/2,h=c=>c[4]-c[2];
+  let sw=0,a=null;for(const b of ok){if(a&&Math.abs(mid(a)-mid(b))>.6*Math.max(h(a),h(b)))sw++;a=b}
+  const rows=[];[...ok].sort((a,b)=>mid(b)-mid(a)).forEach(c=>{const r=rows.length?rows[rows.length-1]:null;
+    if(r&&Math.abs(mid(c)-r.m)<.5*Math.min(h(c),r.h)){r.cs.push(c)}else rows.push({m:mid(c),h:h(c),cs:[c]})});
+  if(sw<3*rows.length)return ch;
+  const out=[];rows.forEach(r=>{r.cs.sort((a,b)=>a[1]-b[1]);r.cs.forEach((c,i)=>{if(i&&c[1]-r.cs[i-1][3]>1.5*h(c))out.push(['\t',0,0,0,0]);out.push(c)});out.push(['\n',0,0,0,0])});
   return out;
 }
 async function pageText(n){if(V.cache.has(n))return V.cache.get(n);
   let r=[];if(V.native){try{r=await inv('pdf_text',{page:n-1})}catch(e){r=[]}}
   const o=ocrPage(n);if(o&&r.length<20)r=ocrChars(o);
-  V.cache.set(n,r);return r}
+  r=readingOrder(r);V.cache.set(n,r);return r}
 const ptOf=(e,d,n)=>{const r=d.getBoundingClientRect();return[(e.clientX-r.left)/V.scale,pageH(n)-(e.clientY-r.top)/V.scale]};
 function nearest(ch,p){let bi=0,bd=1e18;for(let i=0;i<ch.length;i++){const c=ch[i];if(c[3]-c[1]<=0)continue;
   const dx=p[0]<c[1]?c[1]-p[0]:p[0]>c[3]?p[0]-c[3]:0,dy=p[1]<c[2]?c[2]-p[1]:p[1]>c[4]?p[1]-c[4]:0,dd=dx*dx+dy*dy*4;
