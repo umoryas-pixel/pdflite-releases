@@ -4,11 +4,11 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self' ipc: http://ipc.localhost data: blob: https://pdflite-pay.YOUR-NAME.workers.dev; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-:root{--bg:#fff;--fg:#1c1c1e;--mut:#52525b;--line:#e4e4e7;--acc:#2563eb;--card:#f4f4f5;--view:#e9e9ec;--hit:#ffe14d99;--cur:#ff8a00aa;--sel:#2563eb55}
-@media(prefers-color-scheme:dark){:root{--bg:#18181b;--fg:#f4f4f5;--mut:#a1a1aa;--line:#2c2c31;--card:#232327;--view:#101012;--hit:#ffd60a66;--cur:#ff9f0abb;--sel:#4d8dff66}}
+:root{--bg:#fff;--fg:#0f172a;--mut:#5b6474;--line:#e4e7ec;--acc:#2563eb;--acc-t:#2563eb1a;--card:#f1f3f6;--soft:#f6f7f9;--view:#eceef2;--hit:#ffe14d99;--cur:#ff8a00aa;--sel:#2563eb55;--sh:0 8px 28px #0f172a24;--sh-s:0 1px 2px #0f172a1f}
+@media(prefers-color-scheme:dark){:root{--bg:#17181c;--fg:#eef0f4;--mut:#a3a9b6;--line:#2b2e35;--acc:#3b82f6;--acc-t:#3b82f62b;--card:#24262c;--soft:#1d1f24;--view:#0f1013;--hit:#ffd60a66;--cur:#ff9f0abb;--sel:#4d8dff66;--sh:0 8px 28px #0008;--sh-s:0 1px 2px #0006}}
 *{box-sizing:border-box}[hidden]{display:none!important}
 html,body{height:100%;margin:0;touch-action:pan-x pan-y}
-body{font:14px system-ui,'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;overflow:hidden}
+body{font:13px 'Segoe UI Variable Text','Segoe UI',system-ui,Tahoma,'Noto Sans Arabic',sans-serif;background:var(--bg);color:var(--fg);display:flex;flex-direction:column;overflow:hidden}
 button{font:inherit;color:inherit;background:none;border:0;border-radius:6px;padding:5px 10px;cursor:pointer}
 button:hover{background:var(--card)}
 button.pri{background:var(--acc);color:#fff}button.pri:hover{filter:brightness(1.08)}
@@ -147,21 +147,147 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
 #wrap{position:relative}dialog{max-width:94vw}#mk{max-width:98%}#mk button{padding:8px 10px}
 }
 .szp{display:flex;gap:4px;margin:4px;align-items:center}.szp input{width:60px;text-align:center;padding:4px;border:1px solid var(--bd,#ccc);border-radius:6px;background:transparent;color:inherit}.szp button{min-width:30px;text-align:center}
+
+/* ===== Redesign: quiet workspace ===== */
+.grow{flex:1}
+button{border-radius:8px}
+button:disabled{opacity:.45;cursor:default}button:disabled:hover{background:none}
+button.pri{font-weight:600}
+.ib{width:34px;height:34px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--mut);flex:none}
+.ib:hover{color:var(--fg)}.ib .ic{margin:0;width:18px;height:18px}
+.vsep{width:1px;height:22px;background:var(--line);margin:0 6px;flex:none}
+header{height:48px;gap:4px;padding:0 8px 0 12px;background:var(--bg)}
+header .brand{width:26px;height:26px;border-radius:7px;background:#1e40af;display:flex;align-items:center;justify-content:center;flex:none;margin-inline-end:8px}
+header .brand svg{width:16px;height:16px}
+#title{flex:0 1 auto;max-width:280px;font-weight:600;padding:0 12px;height:34px;line-height:34px;border-radius:9px}
+body.has #title{background:var(--card)}
+header:has(#dtabs:not([hidden])) #title{display:none}
+#dtabs{border:0;padding:0;background:none;gap:2px;align-items:center;min-width:0;flex:0 1 auto}
+#dtabs .dt{height:34px;padding:0 6px 0 12px;border-radius:9px;max-width:230px}
+#dtabs .dt.on{background:var(--card)}
+#dtabs .plus{width:34px;height:34px;padding:0;border-radius:8px}
+#bTools,#bSave{height:34px;padding:0 13px;display:inline-flex;align-items:center;gap:7px;flex:none}
+#bTools .ic,#bSave .ic{margin:0}
+#bTools{border:1px solid var(--line);font-weight:500}
+#bSave{margin-inline-start:6px}
+#bSet{margin-inline-start:2px}
+#findbar{background:var(--bg);padding:6px 12px}
+#findbar input{border-radius:8px;padding:6px 10px}
+/* status bar */
+#status{height:34px;flex:none;display:flex;align-items:center;gap:2px;padding:0 10px;border-top:1px solid var(--line);background:var(--bg);color:var(--mut);font-size:12px}
+#status .ib{width:28px;height:26px;border-radius:6px}#status .ib .ic{width:15px;height:15px}
+#status .vsep{height:16px}
+#status .grp{gap:2px;color:var(--mut)}
+#pager input{width:40px;height:24px;padding:2px 4px;border-radius:6px;font-size:12px;margin-inline-end:2px}
+#zv{min-width:42px;font-variant-numeric:tabular-nums}
+#bFit{height:26px;padding:0 8px;border-radius:6px;color:var(--mut);font-size:12px}
+#bLic{margin-inline-start:8px;height:22px;padding:0 10px;font-size:12px;font-weight:500}
+body:not(.has) #status .grow{flex:1}
+/* sidebar */
+#side{width:232px;background:var(--bg)}
+#side .tabs{display:flex;gap:2px;margin:10px;padding:3px;background:var(--card);border:0;border-radius:10px}
+#side .tabs button{flex:none;width:36px;padding:0;height:30px;border-radius:8px;min-width:0}
+#side .tabs button.on{flex:1;width:auto;background:var(--bg);box-shadow:var(--sh-s)}
+#side .tabs button.on .lb{display:inline;font-size:12px;font-weight:600;margin-inline-start:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#side .tabs .ic{width:15px;height:15px}
+#thumbs{padding:6px 10px 12px}
+.th{margin-bottom:14px}.th .im{border:0;border-radius:4px;box-shadow:0 0 0 1px var(--line),0 1px 3px #0f172a14}
+.th.on .im{box-shadow:0 0 0 2px var(--acc),0 2px 6px #0f172a26}.th.on{font-weight:600}
+/* viewer */
+#viewer{padding:20px 0 90px}
+.pg{box-shadow:0 1px 2px #0f172a14,0 8px 24px #0f172a14;margin-bottom:16px}
+/* markup toolbar */
+#mk{bottom:18px;padding:5px;gap:2px;border-radius:14px;box-shadow:var(--sh)}
+#mk button{height:36px;min-width:36px;padding:0 9px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center}
+#mk button .ic{margin:0}
+#mk button .lb{display:none}
+#mk button.on{background:var(--acc-t);color:var(--acc);font-weight:600}
+#mk button.on .lb{display:inline;margin-inline-start:6px}
+#mk #mkRot,#mk #mkHide{min-width:26px;padding:0 4px;opacity:.7}
+#mk .sep{height:22px;margin:0 5px}
+#mk>*{flex:none}
+html[dir=rtl] #rec .rt small{text-align:right}
+#mk.v button{height:auto;min-height:36px}#mk.v button.on .lb{display:none}
+#bSz{font-variant-numeric:tabular-nums}
+/* home screen */
+#empty{background:var(--soft);align-items:flex-start;overflow:auto;padding:44px 32px}
+#empty .home{width:100%;max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+#empty .hmain{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:20px}
+#empty .hside{flex:1 1 320px;min-width:0}
+#empty h1{margin:0;font-size:26px;font-weight:650;letter-spacing:-.01em}
+#empty .hmain>p{margin:-12px 0 0;color:var(--mut);font-size:14px}
+#empty h2{margin:0 0 10px;font-size:12px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.drop{height:200px;width:100%;border:2px dashed #2563eb55;border-radius:16px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px}
+.drop:hover,body.drag .drop{background:var(--bg);border-color:var(--acc)}
+.drop .dic{width:52px;height:52px;border-radius:14px;background:var(--acc-t);color:var(--acc);display:flex;align-items:center;justify-content:center}
+.drop .dic .ic{width:26px;height:26px;margin:0}
+.drop b{font-size:15px}.drop .dsub{color:var(--mut);display:inline-flex;align-items:center;gap:8px}
+.drop .fake{height:32px;padding:0 14px;border-radius:9px;background:var(--acc);color:#fff;font-weight:600;display:inline-flex;align-items:center}
+#rec{margin:0}#rec .rh{display:flex;align-items:baseline;justify-content:space-between}#rec .rh a{font-size:12px;color:var(--acc)}
+#rec .rl{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:4px}
+#rec button{display:flex;align-items:center;gap:12px;width:100%;padding:8px 10px;border-radius:9px;text-align:start;color:var(--fg)}
+#rec .rd{width:28px;height:36px;border-radius:3px;background:#fff;box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;gap:3px;padding:7px 5px;flex:none}
+#rec .rd i{height:2px;background:#cbd5e1;border-radius:1px}#rec .rd i:first-child{height:3px;background:#94a3b8}#rec .rd i:last-child{width:70%}
+#rec .rt{flex:1;min-width:0;display:flex;flex-direction:column}
+#rec .rt b,#rec .rt small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#rec .rt small{color:var(--mut);font-size:12px;direction:ltr;text-align:start}
+#empty .hint{margin:0;font-size:12px}#empty .hint a{color:var(--mut)}
+#qtools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#qtools button{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:14px;min-height:96px;text-align:start;background:var(--bg);border:1px solid var(--line);border-radius:12px;transition:border-color .12s,box-shadow .12s}
+#qtools button:hover{background:var(--bg);border-color:#2563eb66;box-shadow:0 4px 14px #0f172a14}
+#qtools b{font-weight:600}#qtools small{color:var(--mut);font-size:12px;line-height:1.35;margin-top:-6px}
+#qtools .qi{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center}#qtools .qi .ic{margin:0}
+.c-b .qi{background:#eaf1fe;color:#1d4ed8}.c-t .qi{background:#ccfbf1;color:#0f766e}.c-a .qi{background:#fef3c7;color:#b45309}.c-r .qi{background:#ffe4e6;color:#be123c}
+@media(prefers-color-scheme:dark){.c-b .qi{background:#1e3a8a66;color:#93c5fd}.c-t .qi{background:#134e4a88;color:#5eead4}.c-a .qi{background:#78350f66;color:#fcd34d}.c-r .qi{background:#88133766;color:#fda4af}}
+/* dialogs */
+dialog{border-radius:16px;box-shadow:0 24px 60px #0f172a47;padding:20px}
+dialog::backdrop{background:#0f172a61}
+dialog input[type=text],dialog select{border-radius:9px}
+/* tools panel */
+#tools{width:min(820px,96vw);padding:0;overflow:hidden}
+#tools .tw{display:flex;min-height:500px}
+#tools .tnav{width:220px;flex:none;background:var(--soft);border-inline-end:1px solid var(--line);padding:16px 10px;display:flex;flex-direction:column}
+#tools .tn{font-size:15px;padding:0 10px 12px}
+#tools .tt{display:flex;flex-direction:column;gap:2px;background:none;padding:0;margin:0;border-radius:0}
+#tools .tt button{display:flex;align-items:center;gap:10px;height:38px;padding:0 10px;color:var(--fg);text-align:start;border-radius:9px;opacity:.85}
+#tools .tt button .ic{margin:0;flex:none}
+#tools .tt button.on{background:var(--bg);color:var(--acc);font-weight:600;box-shadow:var(--sh-s);opacity:1}
+#tools .tpane{flex:1;min-width:0;padding:20px 24px;display:flex;flex-direction:column}
+#tools .thead{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}#tools .thead>div{flex:1}
+#tools .thead h3{margin:0;font-size:18px;font-weight:650;display:block}
+#tools .thead p{margin:4px 0 0;color:var(--mut)}
+#tdrop{border:1.5px dashed var(--line);border-radius:12px;padding:30px 12px;background:var(--soft)}
+#tdrop:hover{border-color:var(--acc)}
+#tlist li{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+#tgo{margin-top:auto;padding:11px;border-radius:10px}
+#tools .tpane>select,#tools .tpane>input{margin-top:4px}
+html[dir=rtl] #tools .tt button,html[dir=rtl] #tools .thead{text-align:right}
+/* phone / narrow windows */
+@media(max-width:760px){
+  header{height:52px}
+  #title,#dtabs .dt span{max-width:120px}
+  #bTools span,#bSave span{display:none}#bTools,#bSave{padding:0 10px}
+  #status{overflow-x:auto;scrollbar-width:none;height:44px}#status::-webkit-scrollbar{display:none}#status>*{flex:none}
+  #status .ib{width:36px;height:36px}
+  #empty{padding:24px 16px}#empty h1{font-size:22px}.drop{height:170px}
+  #tools .tw{flex-direction:column;min-height:0}#tools .tnav{width:auto;border-inline-end:0;border-bottom:1px solid var(--line);padding:10px}
+  #tools .tn{display:none}#tools .tt{flex-direction:row;overflow-x:auto;scrollbar-width:none}#tools .tt button{flex:none;height:34px}
+  #tools .tpane{padding:16px}
+  #mk{bottom:10px}
+}
 </style></head><body>
 <header>
-  <button id="bSide" class="doc" title="Pages, bookmarks and markups (Ctrl+B)"><svg class="ic" style="margin:0;width:18px;height:18px" viewBox="0 0 24 24"><rect class="f" x="3" y="4" width="18" height="16" rx="2"/><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg></button>
+  <div class="brand" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z" fill="#fff"/><path d="M9.5 10.5h6" stroke="#facc15" stroke-width="2.2" stroke-linecap="round"/><path d="M9.5 14h5" stroke="#cbd5e1" stroke-width="1.6" stroke-linecap="round"/></svg></div>
   <div id="title">Rasm</div>
-  <div id="pager" class="grp doc"><input id="pg" value="1"> / <span id="pn">0</span></div>
-  <div class="grp doc"><button id="bZm" title="Zoom out">−</button><span id="zv">100%</span><button id="bZp" title="Zoom in">+</button><button id="bFit" title="Page size: fit width, fit page, A4, actual size (Ctrl+0 = fit width)">Fit width ▾</button></div>
-  <div class="grp doc"><button id="bRotL" title="Rotate this page left">↺</button><button id="bRotR" title="Rotate this page right">↻</button></div>
-  <button id="bFind" class="doc" title="Find (Ctrl+F)">Find</button>
-  <button id="bPrint" class="doc" title="Print (Ctrl+P)">Print</button>
-  <button id="bSave" class="pri doc" title="Save as… a new PDF file, with your markup included (Ctrl+S)">Save as</button>
-  <button id="bLic" hidden title="Trial / license"></button>
-  <button id="bOpen" title="Open (Ctrl+O)">Open</button>
-  <button id="bTools" title="Compress, merge, split">Tools</button>
+  <div id="dtabs" hidden></div>
+  <span class="grow"></span>
+  <button id="bFind" class="ib doc" title="Find (Ctrl+F)" aria-label="Find"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+  <button id="bPrint" class="ib doc" title="Print (Ctrl+P)" aria-label="Print"><svg class="ic" viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg></button>
+  <button id="bOpen" class="ib" title="Open (Ctrl+O)" aria-label="Open"><svg class="ic" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+  <span class="vsep"></span>
+  <button id="bTools" class="out" title="Compress, merge, split and more"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Tools</span></button>
+  <button id="bSave" class="pri doc" title="Save as… a new PDF file, with your markup included (Ctrl+S)"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span>Save as</span></button>
+  <button id="bSet" class="ib" title="Settings" aria-label="Settings"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
 </header>
-<div id="dtabs" hidden></div>
 <div id="findbar" hidden><input id="q" placeholder="Find in document"><span id="fc"></span><button id="fPrev">↑</button><button id="fNext">↓</button><button id="fX">✕</button></div>
 <div id="wrap">
   <aside id="side" hidden>
@@ -184,23 +310,40 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
       <button id="bSign" title="Signature">Sign</button>
       <span class="sep"></span><span class="swg"></span><button id="bSz" title="Size (number) of new marks, or of the selected mark">14</button>
       <span class="sep"></span>
-      <button id="bUndo" disabled title="Undo (Ctrl+Z)">↶</button>
-      <button id="bRedo" disabled title="Redo (Ctrl+Y)">↷</button>
+      <button id="bUndo" disabled title="Undo (Ctrl+Z)" aria-label="Undo"><svg class="ic" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button>
+      <button id="bRedo" disabled title="Redo (Ctrl+Y)" aria-label="Redo"><svg class="ic" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg></button>
       <button id="bDel" hidden title="Delete selected mark (Del)">✕</button>
     </div>
-    <div id="empty"><div class="card">
-      <h2>Rasm</h2><p>A fast, simple PDF viewer with merge, split and compress.</p>
-      <button id="eOpen" class="pri">Open a PDF</button>
-      <div class="hint">or drop a file anywhere · <a href="#" id="eKeys">keyboard shortcuts</a></div>
-      <div id="rec"></div>
+    <div id="empty"><div class="home">
+      <section class="hmain">
+        <h1>Open a PDF to get started</h1>
+        <p>View, mark up, sign and fix PDFs. Everything stays on this computer.</p>
+        <button id="eOpen" class="drop"><span class="dic"><svg class="ic" viewBox="0 0 24 24"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg></span><b>Drop a PDF here</b><span class="dsub">or <span class="fake">Choose a file</span> Ctrl+O</span></button>
+        <div id="rec"></div>
+        <div class="hint"><a href="#" id="eKeys">Keyboard shortcuts</a></div>
+      </section>
+      <section class="hside"><h2>Quick tools</h2><div id="qtools"><button data-t="compress" class="c-b"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/></svg></span><b>Compress</b><small>Make a PDF smaller</small></button><button data-t="merge" class="c-b"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><b>Merge</b><small>Join several PDFs</small></button><button data-t="split" class="c-b"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M6 3v18M18 3v18M10 12h4M12 10l2 2-2 2"/></svg></span><b>Split</b><small>Pull out pages</small></button><button data-t="images" class="c-t"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="1.5"/><path d="m4 15 4-4 5 5 3-3 4 4"/></svg></span><b>Images to PDF</b><small>Photos and scans</small></button><button data-t="toimg" class="c-t"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="m10 14 2 2 3-4"/></svg></span><b>PDF to images</b><small>Save pages as JPG or PNG</small></button><button data-t="mark" class="c-a"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></span><b>Watermark</b><small>Page numbers and stamps</small></button><button data-t="ocr" class="c-r"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3M8 12h8"/></svg></span><b>Text from scan</b><small>OCR, English and Arabic</small></button><button data-t="rotate" class="c-r"><span class="qi"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></span><b>Rotate pages</b><small>Turn pages the right way</small></button></div></section>
     </div></div>
   </div>
 </div>
+<footer id="status">
+  <button id="bSide" class="ib doc" title="Pages, bookmarks and markups (Ctrl+B)" aria-label="Sidebar"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg></button>
+  <span class="vsep doc"></span>
+  <div id="pager" class="grp doc"><input id="pg" value="1" aria-label="Page"> / <span id="pn">0</span></div>
+  <span class="grow"></span>
+  <div class="grp doc"><button id="bRotL" class="ib" title="Rotate this page left" aria-label="Rotate this page left"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button><button id="bRotR" class="ib" title="Rotate this page right" aria-label="Rotate this page right"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button></div>
+  <span class="vsep doc"></span>
+  <div class="grp doc"><button id="bZm" class="ib" title="Zoom out" aria-label="Zoom out"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14"/></svg></button><span id="zv">100%</span><button id="bZp" class="ib" title="Zoom in" aria-label="Zoom in"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button><button id="bFit" title="Page size: fit width, fit page, A4, actual size (Ctrl+0 = fit width)">Fit width ▾</button></div>
+  <button id="bLic" hidden title="Trial / license"></button>
+</footer>
 <input id="file" type="file" accept=".pdf,application/pdf" hidden>
 <div id="updCard" hidden><button class="x" id="ucX" title="Close">✕</button><b id="ucT">Update available</b><p>It takes a few seconds and keeps your settings.</p><div class="r"><button class="pri" id="ucGo">Update now</button><button id="ucLater">Later</button><button class="sk" id="ucSkip">Skip this version</button></div></div>
-<dialog id="tools">
-  <h3>Tools <button id="tX">✕</button></h3>
-  <div class="tt"><button data-t="compress" class="on">Compress</button><button data-t="merge">Merge</button><button data-t="split">Split</button><button data-t="rotate">Rotate</button><button data-t="delete">Delete</button><button data-t="images" title="Turn photos and images into a PDF">Images</button><button data-t="toimg" title="Save PDF pages as JPG or PNG pictures (ZIP)">To images</button><button data-t="mark" title="Add page numbers and a watermark">Watermark</button><button data-t="ocr" title="Read text in scanned pages so you can search and copy it">OCR</button></div>
+<dialog id="tools"><div class="tw">
+  <nav class="tnav"><b class="tn">Tools</b>
+  <div class="tt"><button data-t="compress" class="on">Compress</button><button data-t="merge">Merge</button><button data-t="split">Split</button><button data-t="rotate">Rotate pages</button><button data-t="delete">Delete pages</button><button data-t="images" title="Turn photos and images into a PDF">Images to PDF</button><button data-t="toimg" title="Save PDF pages as JPG or PNG pictures (ZIP)">PDF to images</button><button data-t="mark" title="Add page numbers and a watermark">Watermark</button><button data-t="ocr" title="Read text in scanned pages so you can search and copy it">Text from scan</button></div>
+  </nav>
+  <div class="tpane">
+  <div class="thead"><div><h3 id="tHead">Compress</h3><p id="tDesc"></p></div><button id="tX" class="ib" title="Close" aria-label="Close">✕</button></div>
   <div id="tdrop">Drop PDF files here or click to choose</div>
   <input id="tfile" type="file" accept=".pdf,application/pdf" multiple hidden>
   <ul id="tlist"></ul>
@@ -222,7 +365,8 @@ header>*{flex:none}#title{display:none}#bPrint{display:none}header button{min-he
   <select id="tlvl"><option value="b">Balanced (good quality, smaller)</option><option value="s">Strong (smallest size)</option></select>
   <button id="tgo" class="pri" disabled>Compress</button>
   <div id="tmsg"></div>
-</dialog>
+  </div>
+</div></dialog>
 <div id="pop" hidden></div>
 <dialog id="dScale">
   <h3>Set scale</h3>
@@ -867,8 +1011,8 @@ $('#fNext').onclick=()=>hit(V.hi+1);$('#fPrev').onclick=()=>hit(V.hi-1);$('#fX')
 /* ---------- open / recent / drop ---------- */
 const recents=()=>{try{return JSON.parse(localStorage.recent||'[]')}catch(e){return[]}};
 function remember(f){if(!f._path)return;const r=recents().filter(x=>x.path!==f._path);r.unshift({name:f.name,path:f._path});try{localStorage.recent=JSON.stringify(r.slice(0,6))}catch(e){}showRecent()}
-function showRecent(){const r=recents();$('#rec').innerHTML=r.length?'<div class="note">Recent</div>'+r.map((x,i)=>'<button data-i="'+i+'">'+esc(x.name)+'</button>').join(''):''}
-$('#rec').onclick=e=>{const b=e.target.closest('button');if(b){const x=recents()[+b.dataset.i];if(x)openNew({name:x.name,_path:x.path})}};
+function showRecent(){const r=recents();$('#rec').innerHTML=r.length?'<div class="rh"><h2>Recent</h2><a href="#" data-clear="1">Clear list</a></div><div class="rl">'+r.map((x,i)=>'<button data-i="'+i+'" title="'+esc(x.path)+'"><span class="rd"><i></i><i></i><i></i></span><span class="rt"><b>'+esc(x.name)+'</b><small data-keep>'+esc(String(x.path).replace(/[\\/][^\\/]*$/,''))+'</small></span></button>').join('')+'</div>':''}
+$('#rec').onclick=e=>{if(e.target.closest('[data-clear]')){e.preventDefault();try{localStorage.recent='[]'}catch(_){}showRecent();return}const b=e.target.closest('button[data-i]');if(b){const x=recents()[+b.dataset.i];if(x)openNew({name:x.name,_path:x.path})}};
 const openNew=f=>openTab(f);
 async function pick(){
   if(T){const p=await inv('pick_pdf');if(p)openNew({name:base(p),_path:p})}
@@ -1514,6 +1658,7 @@ async function imgToJpeg(f){
 function showTools(t){if(t)setTab(t);$('#tools').showModal()}
 function setTab(t){tt=t;tfiles=[];document.querySelectorAll('#tools .tt button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#tmsg').textContent='';renderTools()}
 function renderTools(){
+  if(TD[tt]){$('#tHead').textContent=TD[tt][0];$('#tDesc').textContent=TD[tt][1]}
   $('#tlist').innerHTML=tfiles.map((f,i)=>'<li><span>'+esc(f.name)+'</span><small>'+kb(f.size)+'</small>'+(tt==='merge'||tt==='images'?'<button data-u="'+i+'">↑</button>':'')+'<button data-x="'+i+'">✕</button></li>').join('');
   $('#trange').hidden=!['split','rotate','delete','toimg','mark','ocr'].includes(tt);$('#tocrBox').hidden=tt!=='ocr';$('#tdrop').hidden=tt==='ocr';$('#tlist').hidden=tt==='ocr';$('#tlvl').hidden=tt!=='compress';$('#tfmt').hidden=tt!=='toimg';$('#tmkbox').hidden=tt!=='mark';$('#timg').hidden=tt!=='images';$('#tfile').accept=tt==='images'?'.jpg,.jpeg,.png,.webp,.bmp,.gif,image/*':'.pdf,application/pdf';$('#tdrop').textContent=tt==='images'?'Drop photos or images here (JPG, PNG) or click to choose':'Drop PDF files here or click to choose';$('#tang').hidden=tt!=='rotate';
   $('#trange').placeholder={split:'Pages to extract, e.g. 1-3, 5, 8-10',rotate:'Pages to rotate (empty = all pages), e.g. 1-3, 5',delete:'Pages to delete, e.g. 2, 4-6',toimg:'Pages to save (empty = all pages), e.g. 1-3, 5',mark:'Pages to mark (empty = all pages), e.g. 1-3, 5',ocr:'Pages to read (empty = every page without text), e.g. 1-3, 5'}[tt]||'';
@@ -1523,6 +1668,16 @@ function renderTools(){
 const isImg=n=>/\.(jpe?g|png|webp|bmp|gif)$/i.test(n);
 function addTools(fl){const n=[...fl].filter(f=>tt==='images'?isImg(f.name):isPdf(f.name));tfiles=tt==='merge'||tt==='images'?tfiles.concat(n):n.slice(0,1);renderTools();$('#tmsg').textContent=''}
 $('#bTools').onclick=()=>showTools();
+/* tools: icons in the side list, a title and a line of help for each */
+const TI={compress:'<path d="M4 14h6v6M20 10h-6V4M14 10l7-7M3 21l7-7"/>',merge:'<path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5"/>',split:'<path d="M6 3v18M18 3v18M10 12h4M12 10l2 2-2 2"/>',rotate:'<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',delete:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',images:'<rect x="4" y="5" width="16" height="14" rx="1.5"/><path d="m4 15 4-4 5 5 3-3 4 4"/>',toimg:'<path d="M7 3h7l4 4v14H7z"/><path d="m10 14 2 2 3-4"/>',mark:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',ocr:'<path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3M8 12h8"/>'};
+const TD={compress:['Compress PDF','Make a PDF smaller so it is easier to email or upload.'],merge:['Merge PDFs','Add files in the order you want them joined. Use ↑ to move a file up.'],split:['Split PDF','Save some pages as a new PDF.'],rotate:['Rotate pages','Turn pages that are sideways or upside down.'],delete:['Delete pages','Save a copy without the pages you choose.'],images:['Images to PDF','Turn photos and scans into one PDF.'],toimg:['PDF to images','Save pages as JPG or PNG pictures in a ZIP file.'],mark:['Watermark','Add page numbers and a watermark to every page.'],ocr:['Text from scan','Read the text in scanned pages so you can search and copy it.']};
+document.querySelectorAll('#tools .tt button').forEach(b=>{if(TI[b.dataset.t])b.innerHTML=icon(TI[b.dataset.t])+'<span>'+b.textContent.trim()+'</span>'});
+$('#qtools').onclick=e=>{const b=e.target.closest('[data-t]');if(b)showTools(b.dataset.t)};
+/* settings menu: language, license, shortcuts */
+$('#bSet').onclick=e=>{const b=e.currentTarget;if(!$('#pop').hidden){hidePop();return}
+  showPop(b,'<button data-act="lang"><b>'+(LANG==='ar'?'English':'العربية')+'</b><small>Language · اللغة</small></button><button data-set="lic"><b>License and updates</b><small>Trial, license key, version</small></button><button data-set="keys"><b>Keyboard shortcuts</b><small>Press ? any time</small></button>');
+  const p=$('#pop'),r=b.getBoundingClientRect();p.style.left=Math.max(6,Math.min(r.right-p.offsetWidth,innerWidth-p.offsetWidth-6))+'px'};
+$('#pop').addEventListener('click',e=>{const b=e.target.closest('[data-set]');if(!b)return;hidePop();if(b.dataset.set==='lic'){licUI();$('#dLic').showModal()}else $('#dHelp').showModal()});
 $('#tools').addEventListener('close',()=>{OCR_STOP=true});
 const srcBytes=async f=>f._path?new Uint8Array(await inv('read_file',{path:f._path})):new Uint8Array(await f.arrayBuffer());
 const rotMap=f=>{try{return f&&f._path?JSON.parse(localStorage.getItem('rt:'+f._path)||'{}'):{}}catch(e){return{}}};
@@ -1564,7 +1719,7 @@ async function rotatePage(dir){
   }catch(e){toast('Could not rotate: '+(e.message||e),4000)}
 }
 $('#bRotL').onclick=()=>rotatePage(-90);$('#bRotR').onclick=()=>rotatePage(90);$('#tX').onclick=()=>$('#tools').close();
-document.querySelector('.tt').onclick=e=>{if(e.target.dataset.t)setTab(e.target.dataset.t)};
+document.querySelector('#tools .tt').onclick=e=>{const b=e.target.closest('[data-t]');if(b)setTab(b.dataset.t)};
 $('#tdrop').onclick=()=>$('#tfile').click();
 $('#tfile').onchange=e=>{addTools(e.target.files);e.target.value=''};
 $('#tlist').onclick=e=>{const x=e.target.dataset.x,u=e.target.dataset.u;if(x!=null)tfiles.splice(+x,1);if(u!=null&&+u>0)[tfiles[u-1],tfiles[u]]=[tfiles[u],tfiles[u-1]];renderTools()};
@@ -1753,6 +1908,11 @@ showRecent();renderTools();
 
 /* ---------- language: English / العربية ---------- */
 const AR={
+// redesign (home, tools, settings)
+'Open a PDF to get started':'افتح ملف PDF للبدء','View, mark up, sign and fix PDFs. Everything stays on this computer.':'اعرض ملفات PDF وعلّق عليها ووقّعها وأصلحها. كل شيء يبقى على هذا الجهاز.','Drop a PDF here':'أفلت ملف PDF هنا','or':'أو','Choose a file':'اختر ملفاً','Ctrl+O':'Ctrl+O','Keyboard shortcuts':'اختصارات لوحة المفاتيح','Quick tools':'أدوات سريعة','Recent':'الأخيرة','Clear list':'مسح القائمة',
+'Make a PDF smaller':'تصغير حجم ملف PDF','Join several PDFs':'دمج عدة ملفات PDF','Pull out pages':'استخراج صفحات','Images to PDF':'صور إلى PDF','Photos and scans':'صور ومستندات ممسوحة','PDF to images':'PDF إلى صور','Save pages as JPG or PNG':'حفظ الصفحات بصيغة JPG أو PNG','Page numbers and stamps':'أرقام الصفحات والعلامات','Text from scan':'نص من مسح ضوئي','OCR, English and Arabic':'تعرّف على النص، عربي وإنجليزي','Rotate pages':'تدوير الصفحات','Turn pages the right way':'اضبط اتجاه الصفحات','Delete pages':'حذف الصفحات',
+'Compress PDF':'ضغط PDF','Merge PDFs':'دمج ملفات PDF','Split PDF':'تقسيم PDF','Make a PDF smaller so it is easier to email or upload.':'صغّر حجم ملف PDF ليسهل إرساله أو رفعه.','Add files in the order you want them joined. Use ↑ to move a file up.':'أضف الملفات بالترتيب الذي تريد دمجها به. استخدم ↑ لتحريك ملف للأعلى.','Save some pages as a new PDF.':'احفظ بعض الصفحات في ملف PDF جديد.','Turn pages that are sideways or upside down.':'دوّر الصفحات المائلة أو المقلوبة.','Save a copy without the pages you choose.':'احفظ نسخة بدون الصفحات التي تختارها.','Turn photos and scans into one PDF.':'حوّل الصور والمستندات الممسوحة إلى ملف PDF واحد.','Save pages as JPG or PNG pictures in a ZIP file.':'احفظ الصفحات كصور JPG أو PNG في ملف ZIP.','Add page numbers and a watermark to every page.':'أضف أرقام الصفحات وعلامة مائية إلى كل صفحة.','Read the text in scanned pages so you can search and copy it.':'اقرأ النص في الصفحات الممسوحة لتتمكن من البحث فيه ونسخه.',
+'Settings':'الإعدادات','License and updates':'الترخيص والتحديثات','Trial, license key, version':'التجربة ومفتاح الترخيص والإصدار','Press ? any time':'اضغط ? في أي وقت','Compress, merge, split and more':'ضغط ودمج وتقسيم والمزيد','Zoom out':'تصغير','Zoom in':'تكبير','Undo':'تراجع','Redo':'إعادة','Close':'إغلاق',
 // header, menus
 'Open':'فتح','Tools':'الأدوات','Print':'طباعة','Find':'بحث','Save as':'حفظ باسم','Save as…':'حفظ باسم…','Sidebar':'اللوحة الجانبية','Pages':'الصفحات','Bookmarks':'الإشارات المرجعية','Markups':'التعليقات والعلامات','Shortcuts':'الاختصارات',
 'Fit width':'ملاءمة العرض','Fit page':'ملاءمة الصفحة','A4 size':'حجم A4','Actual size':'الحجم الفعلي','Custom':'مخصص','Fit width ▾':'ملاءمة العرض ▾','Fit page ▾':'ملاءمة الصفحة ▾','A4 size ▾':'حجم A4 ▾','Actual size ▾':'الحجم الفعلي ▾','Custom ▾':'مخصص ▾',
